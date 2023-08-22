@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file D:\source\repos\py\\py\location.hh
+ ** \file location.hh
  ** Define the PyLanguage::location class.
  */
 
-#ifndef YY_P_YY_D_SOURCE_REPOS_PY_PY_LOCATION_HH_INCLUDED
-# define YY_P_YY_D_SOURCE_REPOS_PY_PY_LOCATION_HH_INCLUDED
+#ifndef YY_P_YY_LOCATION_HH_INCLUDED
+# define YY_P_YY_LOCATION_HH_INCLUDED
 
 # include <iostream>
 # include <string>
@@ -53,9 +53,9 @@
 #  endif
 # endif
 
-#line 15 "parser.y"
+#line 18 "parser.y"
 namespace PyLanguage {
-#line 59 "D:\\source\\repos\\py\\\\py\\location.hh"
+#line 59 "location.hh"
 
   /// A point in a source file.
   class position
@@ -299,8 +299,8 @@ namespace PyLanguage {
     return ostr;
   }
 
-#line 15 "parser.y"
+#line 18 "parser.y"
 } // PyLanguage
-#line 305 "D:\\source\\repos\\py\\\\py\\location.hh"
+#line 305 "location.hh"
 
-#endif // !YY_P_YY_D_SOURCE_REPOS_PY_PY_LOCATION_HH_INCLUDED
+#endif // !YY_P_YY_LOCATION_HH_INCLUDED

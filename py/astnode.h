@@ -10,7 +10,7 @@
 #include "PreCompiled.h"
 #include <boost/signals2.hpp>
 #include "Visitor.h"
-#include "parser.tab.hpp"
+#include "PParser.h"
 #include "variablerecord.h"
 
 typedef PyLanguage::Parser::token token;

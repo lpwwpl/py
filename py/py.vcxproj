@@ -118,7 +118,7 @@
     <ClCompile Include="numberliteralnode.cpp" />
     <ClCompile Include="operatornode.cpp" />
     <ClCompile Include="parameternode.cpp" />
-    <ClCompile Include="parser.tab.cpp" />
+    <ClCompile Include="PParser.cpp" />
     <ClCompile Include="PreCompiled.cpp" />
     <ClCompile Include="returnnode.cpp" />
     <ClCompile Include="statementlistnode.cpp" />
@@ -160,8 +160,8 @@
     <ClInclude Include="numberliteralnode.h" />
     <ClInclude Include="operatornode.h" />
     <ClInclude Include="parameternode.h" />
-    <ClInclude Include="parser.tab.hpp" />
     <ClInclude Include="position.hh" />
+    <ClInclude Include="PParser.h" />
     <ClInclude Include="PreCompiled.h" />
     <ClInclude Include="returnnode.h" />
     <ClInclude Include="stack.hh" />

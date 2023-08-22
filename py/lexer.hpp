@@ -1,25 +1,25 @@
 #ifndef PY__LEXER_HPP__
 #define PY__LEXER_HPP__
 
-#if ! defined(yyFlexLexerOnce)
+//#if ! defined(yyFlexLexerOnce)
+//#undef yyFlexLexer
+//#define yyFlexLexer P_yyFlexLexer
+//#include <FlexLexer.h>
+//#endif
+
 #undef yyFlexLexer
 #define yyFlexLexer P_yyFlexLexer
 #include <FlexLexer.h>
-#endif
-
-//#if ! defined(yyFlexLexerOnce)
-//#include <FlexLexer.h>
-//#endif
 
 #undef  YY_DECL
 #define YY_DECL int  PyLanguage::Lexer::yylex()
 
-#include "parser.tab.hpp"
+#include "PParser.h"
 #include "location.hh"
 namespace PyLanguage
 {
 
-class Lexer : public yyFlexLexer{
+class Lexer : public yyFlexLexer {
 public:
 
    Lexer(std::istream *in) : yyFlexLexer(in),

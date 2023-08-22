@@ -28,25 +28,25 @@
 //  PURPOSE.
 
 // This file defines FlexLexer, an abstract class which specifies the
-// external interface provided to flex C++ lexer objects, and yyFlexLexer,
+// external interface provided to flex C++ lexer objects, and P_yyFlexLexer,
 // which defines a particular lexer class.
 //
 // If you want to create multiple lexer classes, you use the -P flag
-// to rename each yyFlexLexer to some other xxFlexLexer.  You then
+// to rename each P_yyFlexLexer to some other xxFlexLexer.  You then
 // include <FlexLexer.h> in your other sources once per lexer class:
 //
-//      #undef yyFlexLexer
-//      #define yyFlexLexer xxFlexLexer
+//      #undef P_yyFlexLexer
+//      #define P_yyFlexLexer xxFlexLexer
 //      #include <FlexLexer.h>
 //
-//      #undef yyFlexLexer
-//      #define yyFlexLexer zzFlexLexer
+//      #undef P_yyFlexLexer
+//      #define P_yyFlexLexer zzFlexLexer
 //      #include <FlexLexer.h>
 //      ...
 
-#ifndef __FLEX_LEXER_H
+#ifndef P__FLEX_LEXER_H
 // Never included before - need to define base class.
-#define __FLEX_LEXER_H
+#define P__FLEX_LEXER_H
 
 #include <iostream>
 
@@ -108,26 +108,26 @@ extern "C++" {
 }
 #endif // FLEXLEXER_H
 
-#if defined(yyFlexLexer) || ! defined(yyFlexLexerOnce)
+#if defined(P_yyFlexLexer) || ! defined(yyFlexLexerOnce)
 // Either this is the first time through (yyFlexLexerOnce not defined),
 // or this is a repeated include to define a different flavor of
-// yyFlexLexer, as discussed in the flex manual.
+// P_yyFlexLexer, as discussed in the flex manual.
 # define yyFlexLexerOnce
 
 extern "C++" {
 
-    class yyFlexLexer : public FlexLexer {
+    class P_yyFlexLexer : public FlexLexer {
     public:
         // arg_yyin and arg_yyout default to the cin and cout, but we
         // only make that assignment when initializing in yylex().
-        yyFlexLexer(std::istream& arg_yyin, std::ostream& arg_yyout);
-        yyFlexLexer(std::istream* arg_yyin = 0, std::ostream* arg_yyout = 0);
+        P_yyFlexLexer(std::istream& arg_yyin, std::ostream& arg_yyout);
+        P_yyFlexLexer(std::istream* arg_yyin = 0, std::ostream* arg_yyout = 0);
     private:
         void ctor_common();
 
     public:
 
-        virtual ~yyFlexLexer();
+        virtual ~P_yyFlexLexer();
 
         void yy_switch_to_buffer(yy_buffer_state* new_buffer);
         yy_buffer_state* yy_create_buffer(std::istream* s, int size);
@@ -217,4 +217,4 @@ extern "C++" {
 
 }
 
-#endif // yyFlexLexer || ! yyFlexLexerOnce
+#endif // P_yyFlexLexer || ! yyFlexLexerOnce

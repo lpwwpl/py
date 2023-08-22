@@ -1290,7 +1290,7 @@ return token::RANGE;
 case 31:
 YY_RULE_SETUP
 #line 239 "lexer.l"
-return token::IN;
+return token::PIN;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP

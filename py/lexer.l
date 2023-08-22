@@ -80,7 +80,7 @@ num2    {dig}*\.{dig}+([eE][-+]?{dig}+)?
 number  {num1}|{num2}|{lnum}
 
 
-SPACE       [ \f\n\r\t\v]+
+SPACES       [ \f\n\r\t\v]+
 CONTINUE    CONTINUE
 PASS    PASS
 NOT NOT
@@ -98,7 +98,7 @@ TRUE        TRUE
 FALSE       FALSE
 FROM        FROM
 RANGE          RANGE
-IN          IN
+PIN          IN
 WHILE       WHILE
 FOR         FOR
 MOD         MOD
@@ -235,7 +235,7 @@ import              BEGIN(incl);
 {SELF}                  return token::SELF;
 {BREAK}                 return token::BREAK;
 {RANGE}                 return token::RANGE;
-{IN}                    return token::IN;
+{PIN}                    return token::PIN;
 {DEF}                  return token::DEF;
 {NOT}           { return token::NOT; }
 {IF}						{ return token::IF; }
@@ -246,7 +246,7 @@ import              BEGIN(incl);
 {AND}                       {return token::AND;}
 {OR}                        {return token::OR;}
 {MOD}                       { return token::MOD;}
-{SPACE}      {}
+{SPACES}      {}
 {TRUE}   {return token::FTRUE;}
 {FALSE}  {return token::FFALSE;}
 {FOR}           {return token::FOR;}

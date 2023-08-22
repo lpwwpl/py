@@ -89,9 +89,6 @@
     <ClCompile Include="parameternode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parser.tab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PreCompiled.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="whilenode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -211,9 +211,6 @@
     <ClInclude Include="parameternode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parser.tab.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="position.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="whilenode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

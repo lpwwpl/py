@@ -3,7 +3,7 @@
 
 #include <string>
 #include "lexer.hpp"
-#include "parser.tab.hpp"
+#include "PParser.h"
 
 #include "PreCompiled.h"
 namespace PyLanguage

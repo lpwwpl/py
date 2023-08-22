@@ -11,6 +11,9 @@
 %verbose 
 %locations /* track locations: @n of component N; @$ of entire range */
 
+%output  "PParser.cpp"
+%defines "PParser.h"
+
 %define api.prefix {P_yy}
 %define api.namespace {PyLanguage}
 %define parser_class_name {Parser}
@@ -123,7 +126,7 @@
 %nonassoc PREFIX
 
 //DIV
-%token GE LE EQ NE IF ADD SUB MUL LT GT RETURN NumberType TextType VoidType SPACE THEN DOLAR UMINUS  CLASS SELF IN RANGE BREAK DEF DOT PASS CONTINUE
+%token GE LE EQ NE IF ADD SUB MUL LT GT RETURN NumberType TextType VoidType SPACES THEN DOLAR UMINUS  CLASS SELF PIN RANGE BREAK DEF DOT PASS CONTINUE
 %token ASS LR RR COMMA LC RC LESS GREATER COLON FNULL DEVCOLON NOT UNINDENT INDENT
 %token FTRUE FFALSE FOR FROM SEMICOLON  LBRACE RBRACE WHILE
 %token AND OR MOD ELIF    
@@ -254,7 +257,7 @@ for_expression:
     ;
 
 for:
-    FOR Identifier IN for_expression COLON block  {  IdentifierNode* id = new IdentifierNode($2);$$ = new ForNode(id,$4,$6);}
+    FOR Identifier PIN for_expression COLON block  {  IdentifierNode* id = new IdentifierNode($2);$$ = new ForNode(id,$4,$6);}
     ;
 
 if:
