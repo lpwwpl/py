@@ -1,0 +1,2711 @@
+Terminals unused in grammar
+
+    DIVIDE
+    NumberType
+    TextType
+    VoidType
+    SPACE
+    THEN
+    DOLAR
+    SELF
+    LESS
+    GREATER
+    DEVCOLON
+    UNINDENT
+    INDENT
+    FROM
+    SEMICOLON
+
+
+State 100 conflicts: 1 shift/reduce
+State 107 conflicts: 8 shift/reduce
+State 127 conflicts: 2 shift/reduce
+State 135 conflicts: 2 shift/reduce
+
+
+Grammar
+
+    0 $accept: program "end of file"
+
+    1 program: declaration_list
+
+    2 declaration_list: declaration
+    3                 | declaration_list declaration
+
+    4 declaration: function_declaration
+    5            | var_assignment
+    6            | Class_declare
+
+    7 Class_declare: CLASS Identifier COLON declaration
+    8              | CLASS Identifier LC struct_index RC COLON declaration
+
+    9 function_declaration: DEF Identifier LC parameter_declaration_list RC COLON block
+
+   10 parameter_declaration_list: parameter_declaration
+   11                           | parameter_declaration_list COMMA parameter_declaration
+   12                           | %empty
+
+   13 parameter_declaration: var_expression
+
+   14 func_call_parameter_list: expression
+   15                         | func_call_parameter_list COMMA expression
+
+   16 block: statement_list
+
+   17 statement_list: statement
+   18               | statement_list statement
+
+   19 function_call: Identifier LC func_call_parameter_list RC
+   20              | Identifier LC RC
+
+   21 statement: assignment
+   22          | if
+   23          | while_loop
+   24          | for
+   25          | return
+   26          | function_call
+   27          | BREAK
+   28          | CONTINUE
+   29          | PASS
+
+   30 return: RETURN
+   31       | RETURN expression
+
+   32 while_loop: WHILE expression COLON block
+
+   33 for_expression: RANGE LC dim_num_stm RC
+   34               | Identifier
+   35               | LR dim_num_stm RR
+
+   36 for: FOR Identifier IN for_expression COLON block
+
+   37 if: IF expression COLON block
+   38   | IF expression COLON block elseif_statment_list
+
+   39 elseif_statment_list: elseif_statment
+   40                     | elseif_statment_list elseif_statment
+
+   41 elseif_statment: ELSE COLON block
+   42                | ELIF expression COLON block
+
+   43 var_expression: Identifier
+   44               | array_index
+   45               | struct_index
+
+   46 var_assignment: Identifier ASS expression
+   47               | array_index ASS expression
+   48               | struct_index ASS expression
+
+   49 assignment: var_expression ASS expression
+
+   50 dim_num_stm: expression
+   51            | dim_num_stm COMMA expression
+
+   52 struct_index: var_expression DOT Identifier
+
+   53 array_index: Identifier LBRACE expression RBRACE
+
+   54 op_expr: expression ADD expression
+   55        | expression SUB expression
+   56        | SUB expression
+   57        | expression MUL expression
+   58        | expression LT expression
+   59        | expression GT expression
+   60        | expression GE expression
+   61        | expression LE expression
+   62        | expression NE expression
+   63        | expression EQ expression
+   64        | expression AND expression
+   65        | expression OR expression
+   66        | expression MOD expression
+   67        | NOT expression
+   68        | LC expression RC
+
+   69 expression: String
+   70           | FNULL
+   71           | Number
+   72           | LNumber
+   73           | FTRUE
+   74           | FFALSE
+   75           | var_expression
+   76           | op_expr
+   77           | function_call
+   78           | LR dim_num_stm RR
+
+
+Terminals, with rules where they appear
+
+    "end of file" (0) 0
+    error (256)
+    DIVIDE (258)
+    ELSE (259) 41
+    PREFIX (260)
+    GE (261) 60
+    LE (262) 61
+    EQ (263) 63
+    NE (264) 62
+    IF (265) 37 38
+    ADD (266) 54
+    SUB (267) 55 56
+    MUL (268) 57
+    LT (269) 58
+    GT (270) 59
+    RETURN (271) 30 31
+    NumberType <ival> (272)
+    TextType <ival> (273)
+    VoidType <ival> (274)
+    SPACE (275)
+    THEN (276)
+    DOLAR (277)
+    UMINUS (278)
+    CLASS (279) 7 8
+    SELF (280)
+    IN (281) 36
+    RANGE (282) 33
+    BREAK (283) 27
+    DEF (284) 9
+    DOT (285) 52
+    PASS (286) 29
+    CONTINUE (287) 28
+    ASS (288) 46 47 48 49
+    LR (289) 35 78
+    RR (290) 35 78
+    COMMA (291) 11 15 51
+    LC (292) 8 9 19 20 33 68
+    RC (293) 8 9 19 20 33 68
+    LESS (294)
+    GREATER (295)
+    COLON (296) 7 8 9 32 36 37 38 41 42
+    FNULL (297) 70
+    DEVCOLON (298)
+    NOT (299) 67
+    UNINDENT (300)
+    INDENT (301)
+    FTRUE (302) 73
+    FFALSE (303) 74
+    FOR (304) 36
+    FROM (305)
+    SEMICOLON (306)
+    LBRACE (307) 53
+    RBRACE (308) 53
+    WHILE (309) 32
+    AND (310) 64
+    OR (311) 65
+    MOD (312) 66
+    ELIF (313) 42
+    Number <dval> (314) 71
+    LNumber <ival> (315) 72
+    Identifier <sval> (316) 7 8 9 19 20 34 36 43 46 52 53
+    String <sval> (317) 69
+
+
+Nonterminals, with rules where they appear
+
+    $accept (63)
+        on left: 0
+    program <pNode> (64)
+        on left: 1
+        on right: 0
+    declaration_list <listNode> (65)
+        on left: 2 3
+        on right: 1 3
+    declaration <pNode> (66)
+        on left: 4 5 6
+        on right: 2 3 7 8
+    Class_declare <pNode> (67)
+        on left: 7 8
+        on right: 6
+    function_declaration <functionNode> (68)
+        on left: 9
+        on right: 4
+    parameter_declaration_list <parameterListNode> (69)
+        on left: 10 11 12
+        on right: 9 11
+    parameter_declaration <parameterNode> (70)
+        on left: 13
+        on right: 10 11
+    func_call_parameter_list <listNode> (71)
+        on left: 14 15
+        on right: 15 19
+    block <statementListNode> (72)
+        on left: 16
+        on right: 9 32 36 37 38 41 42
+    statement_list <statementListNode> (73)
+        on left: 17 18
+        on right: 16 18
+    function_call <pNode> (74)
+        on left: 19 20
+        on right: 26 77
+    statement <pNode> (75)
+        on left: 21 22 23 24 25 26 27 28 29
+        on right: 17 18
+    return <pNode> (76)
+        on left: 30 31
+        on right: 25
+    while_loop <pNode> (77)
+        on left: 32
+        on right: 23
+    for_expression <pNode> (78)
+        on left: 33 34 35
+        on right: 36
+    for <pNode> (79)
+        on left: 36
+        on right: 24
+    if <pNode> (80)
+        on left: 37 38
+        on right: 22
+    elseif_statment_list <elseifListNode> (81)
+        on left: 39 40
+        on right: 38 40
+    elseif_statment <elseif_stmNode> (82)
+        on left: 41 42
+        on right: 39 40
+    var_expression <pNode> (83)
+        on left: 43 44 45
+        on right: 13 49 52 75
+    var_assignment <pNode> (84)
+        on left: 46 47 48
+        on right: 5
+    assignment <pNode> (85)
+        on left: 49
+        on right: 21
+    dim_num_stm <dim_num_stmNode> (86)
+        on left: 50 51
+        on right: 33 35 51 78
+    struct_index <pNode> (87)
+        on left: 52
+        on right: 8 45 48
+    array_index <pNode> (88)
+        on left: 53
+        on right: 44 47
+    op_expr <pNode> (89)
+        on left: 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
+        on right: 76
+    expression <pNode> (90)
+        on left: 69 70 71 72 73 74 75 76 77 78
+        on right: 14 15 31 32 37 38 42 46 47 48 49 50 51 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
+
+
+State 0
+
+    0 $accept: . program "end of file"
+
+    CLASS       shift, and go to state 1
+    DEF         shift, and go to state 2
+    Identifier  shift, and go to state 3
+
+    program               go to state 4
+    declaration_list      go to state 5
+    declaration           go to state 6
+    Class_declare         go to state 7
+    function_declaration  go to state 8
+    var_expression        go to state 9
+    var_assignment        go to state 10
+    struct_index          go to state 11
+    array_index           go to state 12
+
+
+State 1
+
+    7 Class_declare: CLASS . Identifier COLON declaration
+    8              | CLASS . Identifier LC struct_index RC COLON declaration
+
+    Identifier  shift, and go to state 13
+
+
+State 2
+
+    9 function_declaration: DEF . Identifier LC parameter_declaration_list RC COLON block
+
+    Identifier  shift, and go to state 14
+
+
+State 3
+
+   43 var_expression: Identifier .
+   46 var_assignment: Identifier . ASS expression
+   53 array_index: Identifier . LBRACE expression RBRACE
+
+    ASS     shift, and go to state 15
+    LBRACE  shift, and go to state 16
+
+    $default  reduce using rule 43 (var_expression)
+
+
+State 4
+
+    0 $accept: program . "end of file"
+
+    "end of file"  shift, and go to state 17
+
+
+State 5
+
+    1 program: declaration_list .
+    3 declaration_list: declaration_list . declaration
+
+    CLASS       shift, and go to state 1
+    DEF         shift, and go to state 2
+    Identifier  shift, and go to state 3
+
+    $default  reduce using rule 1 (program)
+
+    declaration           go to state 18
+    Class_declare         go to state 7
+    function_declaration  go to state 8
+    var_expression        go to state 9
+    var_assignment        go to state 10
+    struct_index          go to state 11
+    array_index           go to state 12
+
+
+State 6
+
+    2 declaration_list: declaration .
+
+    $default  reduce using rule 2 (declaration_list)
+
+
+State 7
+
+    6 declaration: Class_declare .
+
+    $default  reduce using rule 6 (declaration)
+
+
+State 8
+
+    4 declaration: function_declaration .
+
+    $default  reduce using rule 4 (declaration)
+
+
+State 9
+
+   52 struct_index: var_expression . DOT Identifier
+
+    DOT  shift, and go to state 19
+
+
+State 10
+
+    5 declaration: var_assignment .
+
+    $default  reduce using rule 5 (declaration)
+
+
+State 11
+
+   45 var_expression: struct_index .
+   48 var_assignment: struct_index . ASS expression
+
+    ASS  shift, and go to state 20
+
+    $default  reduce using rule 45 (var_expression)
+
+
+State 12
+
+   44 var_expression: array_index .
+   47 var_assignment: array_index . ASS expression
+
+    ASS  shift, and go to state 21
+
+    $default  reduce using rule 44 (var_expression)
+
+
+State 13
+
+    7 Class_declare: CLASS Identifier . COLON declaration
+    8              | CLASS Identifier . LC struct_index RC COLON declaration
+
+    LC     shift, and go to state 22
+    COLON  shift, and go to state 23
+
+
+State 14
+
+    9 function_declaration: DEF Identifier . LC parameter_declaration_list RC COLON block
+
+    LC  shift, and go to state 24
+
+
+State 15
+
+   46 var_assignment: Identifier ASS . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 41
+
+
+State 16
+
+   53 array_index: Identifier LBRACE . expression RBRACE
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 42
+
+
+State 17
+
+    0 $accept: program "end of file" .
+
+    $default  accept
+
+
+State 18
+
+    3 declaration_list: declaration_list declaration .
+
+    $default  reduce using rule 3 (declaration_list)
+
+
+State 19
+
+   52 struct_index: var_expression DOT . Identifier
+
+    Identifier  shift, and go to state 43
+
+
+State 20
+
+   48 var_assignment: struct_index ASS . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 44
+
+
+State 21
+
+   47 var_assignment: array_index ASS . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 45
+
+
+State 22
+
+    8 Class_declare: CLASS Identifier LC . struct_index RC COLON declaration
+
+    Identifier  shift, and go to state 46
+
+    var_expression  go to state 9
+    struct_index    go to state 47
+    array_index     go to state 39
+
+
+State 23
+
+    7 Class_declare: CLASS Identifier COLON . declaration
+
+    CLASS       shift, and go to state 1
+    DEF         shift, and go to state 2
+    Identifier  shift, and go to state 3
+
+    declaration           go to state 48
+    Class_declare         go to state 7
+    function_declaration  go to state 8
+    var_expression        go to state 9
+    var_assignment        go to state 10
+    struct_index          go to state 11
+    array_index           go to state 12
+
+
+State 24
+
+    9 function_declaration: DEF Identifier LC . parameter_declaration_list RC COLON block
+
+    Identifier  shift, and go to state 46
+
+    $default  reduce using rule 12 (parameter_declaration_list)
+
+    parameter_declaration_list  go to state 49
+    parameter_declaration       go to state 50
+    var_expression              go to state 51
+    struct_index                go to state 38
+    array_index                 go to state 39
+
+
+State 25
+
+   56 op_expr: SUB . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 52
+
+
+State 26
+
+   78 expression: LR . dim_num_stm RR
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    dim_num_stm     go to state 53
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 54
+
+
+State 27
+
+   68 op_expr: LC . expression RC
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 55
+
+
+State 28
+
+   70 expression: FNULL .
+
+    $default  reduce using rule 70 (expression)
+
+
+State 29
+
+   67 op_expr: NOT . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 56
+
+
+State 30
+
+   73 expression: FTRUE .
+
+    $default  reduce using rule 73 (expression)
+
+
+State 31
+
+   74 expression: FFALSE .
+
+    $default  reduce using rule 74 (expression)
+
+
+State 32
+
+   71 expression: Number .
+
+    $default  reduce using rule 71 (expression)
+
+
+State 33
+
+   72 expression: LNumber .
+
+    $default  reduce using rule 72 (expression)
+
+
+State 34
+
+   19 function_call: Identifier . LC func_call_parameter_list RC
+   20              | Identifier . LC RC
+   43 var_expression: Identifier .
+   53 array_index: Identifier . LBRACE expression RBRACE
+
+    LC      shift, and go to state 57
+    LBRACE  shift, and go to state 16
+
+    $default  reduce using rule 43 (var_expression)
+
+
+State 35
+
+   69 expression: String .
+
+    $default  reduce using rule 69 (expression)
+
+
+State 36
+
+   77 expression: function_call .
+
+    $default  reduce using rule 77 (expression)
+
+
+State 37
+
+   52 struct_index: var_expression . DOT Identifier
+   75 expression: var_expression .
+
+    DOT  shift, and go to state 19
+
+    $default  reduce using rule 75 (expression)
+
+
+State 38
+
+   45 var_expression: struct_index .
+
+    $default  reduce using rule 45 (var_expression)
+
+
+State 39
+
+   44 var_expression: array_index .
+
+    $default  reduce using rule 44 (var_expression)
+
+
+State 40
+
+   76 expression: op_expr .
+
+    $default  reduce using rule 76 (expression)
+
+
+State 41
+
+   46 var_assignment: Identifier ASS expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 46 (var_assignment)
+
+
+State 42
+
+   53 array_index: Identifier LBRACE expression . RBRACE
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE      shift, and go to state 58
+    LE      shift, and go to state 59
+    EQ      shift, and go to state 60
+    NE      shift, and go to state 61
+    ADD     shift, and go to state 62
+    SUB     shift, and go to state 63
+    MUL     shift, and go to state 64
+    LT      shift, and go to state 65
+    GT      shift, and go to state 66
+    RBRACE  shift, and go to state 70
+    AND     shift, and go to state 67
+    OR      shift, and go to state 68
+    MOD     shift, and go to state 69
+
+
+State 43
+
+   52 struct_index: var_expression DOT Identifier .
+
+    $default  reduce using rule 52 (struct_index)
+
+
+State 44
+
+   48 var_assignment: struct_index ASS expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 48 (var_assignment)
+
+
+State 45
+
+   47 var_assignment: array_index ASS expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 47 (var_assignment)
+
+
+State 46
+
+   43 var_expression: Identifier .
+   53 array_index: Identifier . LBRACE expression RBRACE
+
+    LBRACE  shift, and go to state 16
+
+    $default  reduce using rule 43 (var_expression)
+
+
+State 47
+
+    8 Class_declare: CLASS Identifier LC struct_index . RC COLON declaration
+   45 var_expression: struct_index .
+
+    RC  shift, and go to state 71
+
+    $default  reduce using rule 45 (var_expression)
+
+
+State 48
+
+    7 Class_declare: CLASS Identifier COLON declaration .
+
+    $default  reduce using rule 7 (Class_declare)
+
+
+State 49
+
+    9 function_declaration: DEF Identifier LC parameter_declaration_list . RC COLON block
+   11 parameter_declaration_list: parameter_declaration_list . COMMA parameter_declaration
+
+    COMMA  shift, and go to state 72
+    RC     shift, and go to state 73
+
+
+State 50
+
+   10 parameter_declaration_list: parameter_declaration .
+
+    $default  reduce using rule 10 (parameter_declaration_list)
+
+
+State 51
+
+   13 parameter_declaration: var_expression .
+   52 struct_index: var_expression . DOT Identifier
+
+    DOT  shift, and go to state 19
+
+    $default  reduce using rule 13 (parameter_declaration)
+
+
+State 52
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   56        | SUB expression .
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    $default  reduce using rule 56 (op_expr)
+
+
+State 53
+
+   51 dim_num_stm: dim_num_stm . COMMA expression
+   78 expression: LR dim_num_stm . RR
+
+    RR     shift, and go to state 74
+    COMMA  shift, and go to state 75
+
+
+State 54
+
+   50 dim_num_stm: expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 50 (dim_num_stm)
+
+
+State 55
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+   68        | LC expression . RC
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    RC   shift, and go to state 76
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+
+State 56
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+   67        | NOT expression .
+
+    $default  reduce using rule 67 (op_expr)
+
+
+State 57
+
+   19 function_call: Identifier LC . func_call_parameter_list RC
+   20              | Identifier LC . RC
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    RC          shift, and go to state 77
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    func_call_parameter_list  go to state 78
+    function_call             go to state 36
+    var_expression            go to state 37
+    struct_index              go to state 38
+    array_index               go to state 39
+    op_expr                   go to state 40
+    expression                go to state 79
+
+
+State 58
+
+   60 op_expr: expression GE . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 80
+
+
+State 59
+
+   61 op_expr: expression LE . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 81
+
+
+State 60
+
+   63 op_expr: expression EQ . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 82
+
+
+State 61
+
+   62 op_expr: expression NE . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 83
+
+
+State 62
+
+   54 op_expr: expression ADD . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 84
+
+
+State 63
+
+   55 op_expr: expression SUB . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 85
+
+
+State 64
+
+   57 op_expr: expression MUL . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 86
+
+
+State 65
+
+   58 op_expr: expression LT . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 87
+
+
+State 66
+
+   59 op_expr: expression GT . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 88
+
+
+State 67
+
+   64 op_expr: expression AND . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 89
+
+
+State 68
+
+   65 op_expr: expression OR . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 90
+
+
+State 69
+
+   66 op_expr: expression MOD . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 91
+
+
+State 70
+
+   53 array_index: Identifier LBRACE expression RBRACE .
+
+    $default  reduce using rule 53 (array_index)
+
+
+State 71
+
+    8 Class_declare: CLASS Identifier LC struct_index RC . COLON declaration
+
+    COLON  shift, and go to state 92
+
+
+State 72
+
+   11 parameter_declaration_list: parameter_declaration_list COMMA . parameter_declaration
+
+    Identifier  shift, and go to state 46
+
+    parameter_declaration  go to state 93
+    var_expression         go to state 51
+    struct_index           go to state 38
+    array_index            go to state 39
+
+
+State 73
+
+    9 function_declaration: DEF Identifier LC parameter_declaration_list RC . COLON block
+
+    COLON  shift, and go to state 94
+
+
+State 74
+
+   78 expression: LR dim_num_stm RR .
+
+    $default  reduce using rule 78 (expression)
+
+
+State 75
+
+   51 dim_num_stm: dim_num_stm COMMA . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 95
+
+
+State 76
+
+   68 op_expr: LC expression RC .
+
+    $default  reduce using rule 68 (op_expr)
+
+
+State 77
+
+   20 function_call: Identifier LC RC .
+
+    $default  reduce using rule 20 (function_call)
+
+
+State 78
+
+   15 func_call_parameter_list: func_call_parameter_list . COMMA expression
+   19 function_call: Identifier LC func_call_parameter_list . RC
+
+    COMMA  shift, and go to state 96
+    RC     shift, and go to state 97
+
+
+State 79
+
+   14 func_call_parameter_list: expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 14 (func_call_parameter_list)
+
+
+State 80
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   60        | expression GE expression .
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 60 (op_expr)
+
+
+State 81
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   61        | expression LE expression .
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 61 (op_expr)
+
+
+State 82
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   63        | expression EQ expression .
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 63 (op_expr)
+
+
+State 83
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   62        | expression NE expression .
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 62 (op_expr)
+
+
+State 84
+
+   54 op_expr: expression . ADD expression
+   54        | expression ADD expression .
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 54 (op_expr)
+
+
+State 85
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   55        | expression SUB expression .
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 55 (op_expr)
+
+
+State 86
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   57        | expression MUL expression .
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    $default  reduce using rule 57 (op_expr)
+
+
+State 87
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   58        | expression LT expression .
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 58 (op_expr)
+
+
+State 88
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   59        | expression GT expression .
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 59 (op_expr)
+
+
+State 89
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   64        | expression AND expression .
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 64 (op_expr)
+
+
+State 90
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   65        | expression OR expression .
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 65 (op_expr)
+
+
+State 91
+
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+   66        | expression MOD expression .
+
+    $default  reduce using rule 66 (op_expr)
+
+
+State 92
+
+    8 Class_declare: CLASS Identifier LC struct_index RC COLON . declaration
+
+    CLASS       shift, and go to state 1
+    DEF         shift, and go to state 2
+    Identifier  shift, and go to state 3
+
+    declaration           go to state 98
+    Class_declare         go to state 7
+    function_declaration  go to state 8
+    var_expression        go to state 9
+    var_assignment        go to state 10
+    struct_index          go to state 11
+    array_index           go to state 12
+
+
+State 93
+
+   11 parameter_declaration_list: parameter_declaration_list COMMA parameter_declaration .
+
+    $default  reduce using rule 11 (parameter_declaration_list)
+
+
+State 94
+
+    9 function_declaration: DEF Identifier LC parameter_declaration_list RC COLON . block
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 106
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 95
+
+   51 dim_num_stm: dim_num_stm COMMA expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 51 (dim_num_stm)
+
+
+State 96
+
+   15 func_call_parameter_list: func_call_parameter_list COMMA . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 116
+
+
+State 97
+
+   19 function_call: Identifier LC func_call_parameter_list RC .
+
+    $default  reduce using rule 19 (function_call)
+
+
+State 98
+
+    8 Class_declare: CLASS Identifier LC struct_index RC COLON declaration .
+
+    $default  reduce using rule 8 (Class_declare)
+
+
+State 99
+
+   37 if: IF . expression COLON block
+   38   | IF . expression COLON block elseif_statment_list
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 117
+
+
+State 100
+
+   30 return: RETURN .
+   31       | RETURN . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    Identifier  [reduce using rule 30 (return)]
+    $default    reduce using rule 30 (return)
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 118
+
+
+State 101
+
+   27 statement: BREAK .
+
+    $default  reduce using rule 27 (statement)
+
+
+State 102
+
+   29 statement: PASS .
+
+    $default  reduce using rule 29 (statement)
+
+
+State 103
+
+   28 statement: CONTINUE .
+
+    $default  reduce using rule 28 (statement)
+
+
+State 104
+
+   36 for: FOR . Identifier IN for_expression COLON block
+
+    Identifier  shift, and go to state 119
+
+
+State 105
+
+   32 while_loop: WHILE . expression COLON block
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 120
+
+
+State 106
+
+    9 function_declaration: DEF Identifier LC parameter_declaration_list RC COLON block .
+
+    $default  reduce using rule 9 (function_declaration)
+
+
+State 107
+
+   16 block: statement_list .
+   18 statement_list: statement_list . statement
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    IF          [reduce using rule 16 (block)]
+    RETURN      [reduce using rule 16 (block)]
+    BREAK       [reduce using rule 16 (block)]
+    PASS        [reduce using rule 16 (block)]
+    CONTINUE    [reduce using rule 16 (block)]
+    FOR         [reduce using rule 16 (block)]
+    WHILE       [reduce using rule 16 (block)]
+    Identifier  [reduce using rule 16 (block)]
+    $default    reduce using rule 16 (block)
+
+    function_call   go to state 108
+    statement       go to state 121
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 108
+
+   26 statement: function_call .
+
+    $default  reduce using rule 26 (statement)
+
+
+State 109
+
+   17 statement_list: statement .
+
+    $default  reduce using rule 17 (statement_list)
+
+
+State 110
+
+   25 statement: return .
+
+    $default  reduce using rule 25 (statement)
+
+
+State 111
+
+   23 statement: while_loop .
+
+    $default  reduce using rule 23 (statement)
+
+
+State 112
+
+   24 statement: for .
+
+    $default  reduce using rule 24 (statement)
+
+
+State 113
+
+   22 statement: if .
+
+    $default  reduce using rule 22 (statement)
+
+
+State 114
+
+   49 assignment: var_expression . ASS expression
+   52 struct_index: var_expression . DOT Identifier
+
+    DOT  shift, and go to state 19
+    ASS  shift, and go to state 122
+
+
+State 115
+
+   21 statement: assignment .
+
+    $default  reduce using rule 21 (statement)
+
+
+State 116
+
+   15 func_call_parameter_list: func_call_parameter_list COMMA expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 15 (func_call_parameter_list)
+
+
+State 117
+
+   37 if: IF expression . COLON block
+   38   | IF expression . COLON block elseif_statment_list
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE     shift, and go to state 58
+    LE     shift, and go to state 59
+    EQ     shift, and go to state 60
+    NE     shift, and go to state 61
+    ADD    shift, and go to state 62
+    SUB    shift, and go to state 63
+    MUL    shift, and go to state 64
+    LT     shift, and go to state 65
+    GT     shift, and go to state 66
+    COLON  shift, and go to state 123
+    AND    shift, and go to state 67
+    OR     shift, and go to state 68
+    MOD    shift, and go to state 69
+
+
+State 118
+
+   31 return: RETURN expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 31 (return)
+
+
+State 119
+
+   36 for: FOR Identifier . IN for_expression COLON block
+
+    IN  shift, and go to state 124
+
+
+State 120
+
+   32 while_loop: WHILE expression . COLON block
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE     shift, and go to state 58
+    LE     shift, and go to state 59
+    EQ     shift, and go to state 60
+    NE     shift, and go to state 61
+    ADD    shift, and go to state 62
+    SUB    shift, and go to state 63
+    MUL    shift, and go to state 64
+    LT     shift, and go to state 65
+    GT     shift, and go to state 66
+    COLON  shift, and go to state 125
+    AND    shift, and go to state 67
+    OR     shift, and go to state 68
+    MOD    shift, and go to state 69
+
+
+State 121
+
+   18 statement_list: statement_list statement .
+
+    $default  reduce using rule 18 (statement_list)
+
+
+State 122
+
+   49 assignment: var_expression ASS . expression
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 126
+
+
+State 123
+
+   37 if: IF expression COLON . block
+   38   | IF expression COLON . block elseif_statment_list
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 127
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 124
+
+   36 for: FOR Identifier IN . for_expression COLON block
+
+    RANGE       shift, and go to state 128
+    LR          shift, and go to state 129
+    Identifier  shift, and go to state 130
+
+    for_expression  go to state 131
+
+
+State 125
+
+   32 while_loop: WHILE expression COLON . block
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 132
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 126
+
+   49 assignment: var_expression ASS expression .
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE   shift, and go to state 58
+    LE   shift, and go to state 59
+    EQ   shift, and go to state 60
+    NE   shift, and go to state 61
+    ADD  shift, and go to state 62
+    SUB  shift, and go to state 63
+    MUL  shift, and go to state 64
+    LT   shift, and go to state 65
+    GT   shift, and go to state 66
+    AND  shift, and go to state 67
+    OR   shift, and go to state 68
+    MOD  shift, and go to state 69
+
+    $default  reduce using rule 49 (assignment)
+
+
+State 127
+
+   37 if: IF expression COLON block .
+   38   | IF expression COLON block . elseif_statment_list
+
+    ELSE  shift, and go to state 133
+    ELIF  shift, and go to state 134
+
+    ELSE      [reduce using rule 37 (if)]
+    ELIF      [reduce using rule 37 (if)]
+    $default  reduce using rule 37 (if)
+
+    elseif_statment_list  go to state 135
+    elseif_statment       go to state 136
+
+
+State 128
+
+   33 for_expression: RANGE . LC dim_num_stm RC
+
+    LC  shift, and go to state 137
+
+
+State 129
+
+   35 for_expression: LR . dim_num_stm RR
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    dim_num_stm     go to state 138
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 54
+
+
+State 130
+
+   34 for_expression: Identifier .
+
+    $default  reduce using rule 34 (for_expression)
+
+
+State 131
+
+   36 for: FOR Identifier IN for_expression . COLON block
+
+    COLON  shift, and go to state 139
+
+
+State 132
+
+   32 while_loop: WHILE expression COLON block .
+
+    $default  reduce using rule 32 (while_loop)
+
+
+State 133
+
+   41 elseif_statment: ELSE . COLON block
+
+    COLON  shift, and go to state 140
+
+
+State 134
+
+   42 elseif_statment: ELIF . expression COLON block
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 141
+
+
+State 135
+
+   38 if: IF expression COLON block elseif_statment_list .
+   40 elseif_statment_list: elseif_statment_list . elseif_statment
+
+    ELSE  shift, and go to state 133
+    ELIF  shift, and go to state 134
+
+    ELSE      [reduce using rule 38 (if)]
+    ELIF      [reduce using rule 38 (if)]
+    $default  reduce using rule 38 (if)
+
+    elseif_statment  go to state 142
+
+
+State 136
+
+   39 elseif_statment_list: elseif_statment .
+
+    $default  reduce using rule 39 (elseif_statment_list)
+
+
+State 137
+
+   33 for_expression: RANGE LC . dim_num_stm RC
+
+    SUB         shift, and go to state 25
+    LR          shift, and go to state 26
+    LC          shift, and go to state 27
+    FNULL       shift, and go to state 28
+    NOT         shift, and go to state 29
+    FTRUE       shift, and go to state 30
+    FFALSE      shift, and go to state 31
+    Number      shift, and go to state 32
+    LNumber     shift, and go to state 33
+    Identifier  shift, and go to state 34
+    String      shift, and go to state 35
+
+    function_call   go to state 36
+    var_expression  go to state 37
+    dim_num_stm     go to state 143
+    struct_index    go to state 38
+    array_index     go to state 39
+    op_expr         go to state 40
+    expression      go to state 54
+
+
+State 138
+
+   35 for_expression: LR dim_num_stm . RR
+   51 dim_num_stm: dim_num_stm . COMMA expression
+
+    RR     shift, and go to state 144
+    COMMA  shift, and go to state 75
+
+
+State 139
+
+   36 for: FOR Identifier IN for_expression COLON . block
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 145
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 140
+
+   41 elseif_statment: ELSE COLON . block
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 146
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 141
+
+   42 elseif_statment: ELIF expression . COLON block
+   54 op_expr: expression . ADD expression
+   55        | expression . SUB expression
+   57        | expression . MUL expression
+   58        | expression . LT expression
+   59        | expression . GT expression
+   60        | expression . GE expression
+   61        | expression . LE expression
+   62        | expression . NE expression
+   63        | expression . EQ expression
+   64        | expression . AND expression
+   65        | expression . OR expression
+   66        | expression . MOD expression
+
+    GE     shift, and go to state 58
+    LE     shift, and go to state 59
+    EQ     shift, and go to state 60
+    NE     shift, and go to state 61
+    ADD    shift, and go to state 62
+    SUB    shift, and go to state 63
+    MUL    shift, and go to state 64
+    LT     shift, and go to state 65
+    GT     shift, and go to state 66
+    COLON  shift, and go to state 147
+    AND    shift, and go to state 67
+    OR     shift, and go to state 68
+    MOD    shift, and go to state 69
+
+
+State 142
+
+   40 elseif_statment_list: elseif_statment_list elseif_statment .
+
+    $default  reduce using rule 40 (elseif_statment_list)
+
+
+State 143
+
+   33 for_expression: RANGE LC dim_num_stm . RC
+   51 dim_num_stm: dim_num_stm . COMMA expression
+
+    COMMA  shift, and go to state 75
+    RC     shift, and go to state 148
+
+
+State 144
+
+   35 for_expression: LR dim_num_stm RR .
+
+    $default  reduce using rule 35 (for_expression)
+
+
+State 145
+
+   36 for: FOR Identifier IN for_expression COLON block .
+
+    $default  reduce using rule 36 (for)
+
+
+State 146
+
+   41 elseif_statment: ELSE COLON block .
+
+    $default  reduce using rule 41 (elseif_statment)
+
+
+State 147
+
+   42 elseif_statment: ELIF expression COLON . block
+
+    IF          shift, and go to state 99
+    RETURN      shift, and go to state 100
+    BREAK       shift, and go to state 101
+    PASS        shift, and go to state 102
+    CONTINUE    shift, and go to state 103
+    FOR         shift, and go to state 104
+    WHILE       shift, and go to state 105
+    Identifier  shift, and go to state 34
+
+    block           go to state 149
+    statement_list  go to state 107
+    function_call   go to state 108
+    statement       go to state 109
+    return          go to state 110
+    while_loop      go to state 111
+    for             go to state 112
+    if              go to state 113
+    var_expression  go to state 114
+    assignment      go to state 115
+    struct_index    go to state 38
+    array_index     go to state 39
+
+
+State 148
+
+   33 for_expression: RANGE LC dim_num_stm RC .
+
+    $default  reduce using rule 33 (for_expression)
+
+
+State 149
+
+   42 elseif_statment: ELIF expression COLON block .
+
+    $default  reduce using rule 42 (elseif_statment)
