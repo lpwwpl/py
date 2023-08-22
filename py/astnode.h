@@ -21,7 +21,7 @@ typedef PyLanguage::Parser::token token;
 namespace PyLanguage
 {
 
- 
+
     struct SAstNodeType
     {
         char command[64];
@@ -36,7 +36,7 @@ namespace PyLanguage
     //    ListNode() {}
     //    ListNode(T* node) { this->push_back(node); }
     //};
-    class RobotAbbExport ASTNode 
+    class RobotAbbExport ASTNode
     {
     public:
         ASTNode();
@@ -44,17 +44,17 @@ namespace PyLanguage
         virtual QVariant Execute();
         virtual void compute() {}
         //name
-        virtual QString getName() { return ""; }
+        virtual QString getName() { return QString::fromLatin1(""); }
 
         //type: int,string,fun return type, var type
         virtual enum_v_type getType() { return _type; }
         //type's string: int,string,fun return type, var type
-        virtual QString getVariablenTypeName() const { return ""; }
+        virtual QString getVariablenTypeName() const { return QString::fromLatin1(""); }
 
         //type's string: int,string,fun return type, var type
-        virtual QString getTypeName() 
-        { 
-            QString ret = "";
+        virtual QString getTypeName()
+        {
+            QString ret = QString::fromLatin1("");
 
             switch (_type)
             {
@@ -62,16 +62,16 @@ namespace PyLanguage
                 ret = getVariablenTypeName();
                 break;
             case enum_v_type::integer:
-                ret = "int";
+                ret = QString::fromLatin1("int");
                 break;
             case enum_v_type::decimal:
-                ret = "double";
+                ret = QString::fromLatin1("double");
                 break;
             case enum_v_type::string:
-                ret = "string";
+                ret = QString::fromLatin1("string");
                 break;
             case enum_v_type::boolean:
-                ret = "boolean";
+                ret = QString::fromLatin1("boolean");
                 break;
             case enum_v_type::function:
                 ret = getVariablenTypeName();
@@ -82,11 +82,11 @@ namespace PyLanguage
             default:break;
             }
             return ret;
-        } 
+        }
 
         void SetPrefix(bool value) { _prefix = value; }
         virtual void Accept(Visitor& v) {}
-        virtual QString toRaw(uint level = 0) { return ""; }
+        virtual QString toRaw(uint level = 0) { return QString::fromLatin1(""); }
 
         static void printError(PyLanguage::location location, std::string msg)
         {
@@ -137,16 +137,16 @@ namespace PyLanguage
     public:
         explicit Boolean(int const value) : boolVal(value) {}
         virtual ~Boolean() = default;
-        QVariant Execute () override
+        QVariant Execute() override
         {
             return QVariant::fromValue(boolVal);
         }
-        QString toRaw(uint level = 0) override 
-        { 
+        QString toRaw(uint level = 0) override
+        {
             if (boolVal)
-                return "TRUE";
+                return QString::fromLatin1("TRUE");
             else
-                return "FALSE";
+                return QString::fromLatin1("FALSE");
         }
         enum_v_type getType() override { return enum_v_type::boolean; }
         void Accept(Visitor& v) override { v.VisitBoolean(this); }

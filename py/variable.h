@@ -5,19 +5,20 @@
 #include "dimnumnode.h"
 #include "identifiernode.h"
 //#include "location.hh"
-enum enum_v_scope
-{
-    PERS = 0,
-    TASK_PERS = 1,
-
-    eCONST =2,
-    VAR=3,
-
-};
 
 
 namespace PyLanguage
 {
+    enum enum_v_scope
+    {
+        PERS = 0,
+        TASK_PERS = 1,
+
+        eCONST = 2,
+        VAR = 3,
+
+    };
+
     class RobotAbbExport VariableNode: public ASTNode
     {
     public:
