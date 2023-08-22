@@ -4,7 +4,7 @@
 #include "errors.h"
 
 
-namespace Language
+namespace PyLanguage
 {
     DeclareListNode::DeclareListNode(ASTNode* caseexpr)
     {

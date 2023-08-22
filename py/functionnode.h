@@ -1,9 +1,9 @@
-#ifndef FUNCTIONNODE_H
-#define FUNCTIONNODE_H
+#ifndef PYFUNCTIONNODE_H
+#define PYFUNCTIONNODE_H
 
 #include "astnode.h"
 #include "identifiernode.h"
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport FunctionNode: public ASTNode
     {
@@ -29,7 +29,7 @@ namespace Language
         IdentifierNode* _ret_type{ nullptr };
         QString _name;
         ASTNode* _type;
-        Language::location _location;
+        PyLanguage::location _location;
     };
 }
 

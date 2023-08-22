@@ -1,9 +1,9 @@
-#ifndef ELSEIFNODE_H
-#define ELSEIFNODE_H
+#ifndef PYELSEIFNODE_H
+#define PYELSEIFNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport ElseIfNode: public ASTNode
     {

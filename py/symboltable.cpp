@@ -6,7 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
-using namespace Language;
+using namespace PyLanguage;
 
 
 
@@ -40,7 +40,7 @@ SymbolTable & SymbolTable::Instance()
         return *_instance.get();
 }
 
-Language::FunctionNode * SymbolTable::Function(QString * name)
+PyLanguage::FunctionNode * SymbolTable::Function(QString * name)
 {
     auto fp = _functions[*name];
     if (nullptr == fp)
@@ -51,7 +51,7 @@ Language::FunctionNode * SymbolTable::Function(QString * name)
     return fp;
 }
 
- bool SymbolTable::DefineFunction(QString * name, Language::FunctionNode *node)
+ bool SymbolTable::DefineFunction(QString * name, PyLanguage::FunctionNode *node)
  {
      if (_functions.count(*name) != 0)
      {
@@ -67,7 +67,7 @@ Language::FunctionNode * SymbolTable::Function(QString * name)
      return true;
  }
 
- bool SymbolTable::DefineStructTypes(QString* name, Language::StructDescNode* node)
+ bool SymbolTable::DefineStructTypes(QString* name, PyLanguage::StructDescNode* node)
  {
      if (_structTypes.count(*name) != 0)
      {
@@ -94,12 +94,12 @@ Language::FunctionNode * SymbolTable::Function(QString * name)
  }
  //QString SymbolTable::toString()
  //{
- //    //std::map<QString, Language::FunctionNode*>
+ //    //std::map<QString, PyLanguage::FunctionNode*>
  //    QString str = "";
  //    for (auto it : _modules)
  //    {
  //        QString funName = it.first;
- //        Language::ModuleNode* module = it.second;
+ //        PyLanguage::ModuleNode* module = it.second;
  //        if (!module)continue;
  //        str += module->toString(1);
  //        str += "\n";
@@ -107,14 +107,14 @@ Language::FunctionNode * SymbolTable::Function(QString * name)
  //    //for (auto it: _functions)
  //    //{
  //    //    QString funName = it.first;
- //    //    Language::FunctionNode* func = it.second;
+ //    //    PyLanguage::FunctionNode* func = it.second;
  //    //    if (!func)continue;
  //    //    str += func->toString(1);
  //    //    str += "\n";
  //    //}
  //    return str;
  //}
-Language::FunctionNode * SymbolTable::EntryPoint()
+PyLanguage::FunctionNode * SymbolTable::EntryPoint()
 {
     if (nullptr == _entrypoint)
     {

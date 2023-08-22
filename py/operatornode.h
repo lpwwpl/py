@@ -1,9 +1,9 @@
-#ifndef OPERATORNODE_H
-#define OPERATORNODE_H
+#ifndef PYOPERATORNODE_H
+#define PYOPERATORNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport OperatorNode: public ASTNode
     {

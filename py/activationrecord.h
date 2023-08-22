@@ -1,5 +1,5 @@
-#ifndef ACTIVATIONRECORD_H
-#define ACTIVATIONRECORD_H
+#ifndef PYACTIVATIONRECORD_H
+#define PYACTIVATIONRECORD_H
 
 #include "ast.h"
 #include "variablerecord.h"
@@ -17,7 +17,7 @@
 
 //    multi_array<int, 5, 2, 2, 2, 2> mygrid;
 //std::vector<uint> dims;
-using namespace Language;
+using namespace PyLanguage;
 
 class RobotAbbExport GlobalRecord
 {
@@ -56,8 +56,8 @@ public:
         if (_variables.find(varName) == _variables.end()) return false;
         else return true;//return _variables[varName];
     }
-    Language::FunctionNode* GetCurFunctionNode() { return _curFunc; }
-    void SetCurFunctionNode(Language::FunctionNode* curFunc)
+    PyLanguage::FunctionNode* GetCurFunctionNode() { return _curFunc; }
+    void SetCurFunctionNode(PyLanguage::FunctionNode* curFunc)
     {
         _curFunc = curFunc;
     }
@@ -66,7 +66,7 @@ public:
 private:
     QMap<QString, QVariant> _variables;
     QVariant _returnValue;
-    Language::FunctionNode* _curFunc;
+    PyLanguage::FunctionNode* _curFunc;
     ASTNode* _curNode;
 };
 

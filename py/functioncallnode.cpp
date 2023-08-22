@@ -4,7 +4,7 @@
 #include "errors.h"
 #include "symboltable.h"
 
-namespace Language
+namespace PyLanguage
 {
     FunctionCallNode::FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList)
             :  ASTNode(), _name(name),
@@ -47,7 +47,7 @@ namespace Language
         for (auto expression: *_expressionList)
             SymbolTable::Instance().PushArgument(expression->Execute());
         SymbolTable::Instance().PushArgument((int)_expressionList->size());
-        Language::FunctionNode*  func = SymbolTable::Instance().Function(_name);
+        PyLanguage::FunctionNode*  func = SymbolTable::Instance().Function(_name);
         if (func)
             return SymbolTable::Instance().Function(_name)->Execute();
         else

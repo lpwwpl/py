@@ -6,7 +6,7 @@
 #include "structindexnode.h"
 
 
-namespace Language
+namespace PyLanguage
 {
 
     AssignmentNode::AssignmentNode(ASTNode* src, ASTNode* expression) :_src(src),_expression(expression), _name("")        

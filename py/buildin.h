@@ -1,9 +1,9 @@
-#ifndef BUILDINNODE_H
-#define BUILDINNODE_H
+#ifndef PYBUILDINNODE_H
+#define PYBUILDINNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport BuildInNode : public ASTNode
     {

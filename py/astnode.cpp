@@ -2,7 +2,7 @@
 
 #include "listnode.h"
 
-namespace Language
+namespace PyLanguage
 {
 
     ASTNode::ASTNode()

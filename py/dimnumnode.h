@@ -1,12 +1,12 @@
-#ifndef DIMNUMNODE_H
-#define DIMNUMNODE_H
+#ifndef PYDIMNUMNODE_H
+#define PYDIMNUMNODE_H
 
 #include "astnode.h"
 #include "listnode.h"
 
 
 
-namespace  Language
+namespace  PyLanguage
 {
     //varDeclarationNodeType varDeclaration;
     //class DimNumNode : public ListNode<ASTNode>

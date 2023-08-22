@@ -1,9 +1,9 @@
-#ifndef STRUCTINDEXNODE_H
-#define STRUCTINDEXNODE_H
+#ifndef PYSTRUCTINDEXNODE_H
+#define PYSTRUCTINDEXNODE_H
 
 #include "astnode.h"
 #include "dimnumnode.h"
-namespace Language
+namespace PyLanguage
 {
     class StructIndexNode: public ASTNode
     {

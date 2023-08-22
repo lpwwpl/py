@@ -1,6 +1,6 @@
 #include "whilenode.h"
 
-namespace Language
+namespace PyLanguage
 {
     WhileNode::WhileNode(ASTNode * expression, ASTNode * body)
             :  _body(body),

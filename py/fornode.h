@@ -1,9 +1,9 @@
-#ifndef FORNODE_H
-#define FORNODE_H
+#ifndef PYFORNODE_H
+#define PYFORNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
 
     class ForNode: public ASTNode

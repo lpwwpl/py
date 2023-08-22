@@ -1,9 +1,9 @@
-#ifndef ACCESSNODE_H
-#define ACCESSNODE_H
+#ifndef PYACCESSNODE_H
+#define PYACCESSNODE_H
 
 #include "astnode.h"
 #include "identifiernode.h"
-namespace Language
+namespace PyLanguage
 {
     //typedef std::vector<int> dimListType;
     //typedef std::vector<ASTNode*> dimRawType;

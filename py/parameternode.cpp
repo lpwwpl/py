@@ -2,7 +2,7 @@
 
 #include "symboltable.h"
 
-namespace Language
+namespace PyLanguage
 {
     ParameterNode::ParameterNode(ASTNode* param, ASTNode * initializer)
             : 

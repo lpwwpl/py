@@ -1,5 +1,5 @@
-#ifndef VisitorTypeCheck_h__
-#define VisitorTypeCheck_h__
+#ifndef PYVisitorTypeCheck_h__
+#define PYVisitorTypeCheck_h__
 
 #include <vector>
 
@@ -7,7 +7,7 @@
 #include <map>
 #include "symboltable.h"
 #include "Visitor.h"
-namespace Language {
+namespace PyLanguage {
 
 	class VisitorTypeCheck : public Visitor
 	{

@@ -1,9 +1,9 @@
-#ifndef STRUCTDESCNODE_H
-#define STRUCTDESCNODE_H
+#ifndef PYSTRUCTDESCNODE_H
+#define PYSTRUCTDESCNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport StructDescNode: public ASTNode
     {

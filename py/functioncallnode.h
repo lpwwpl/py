@@ -1,9 +1,9 @@
-#ifndef FUNCTIONCALLNODE_H
-#define FUNCTIONCALLNODE_H
+#ifndef PYFUNCTIONCALLNODE_H
+#define PYFUNCTIONCALLNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport FunctionCallNode: public ASTNode
     {

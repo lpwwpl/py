@@ -1,7 +1,7 @@
 #include "identifiernode.h"
 #include "symboltable.h"
 
-namespace Language
+namespace PyLanguage
 {
     IdentifierNode::IdentifierNode(QString * name) : _name(*name)
     {

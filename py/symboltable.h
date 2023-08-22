@@ -1,5 +1,5 @@
-#ifndef SYMBOLTABLE_H
-#define SYMBOLTABLE_H
+#ifndef PYSYMBOLTABLE_H
+#define PYSYMBOLTABLE_H
 
 #include <QString>
 #include <map>
@@ -13,7 +13,7 @@
 #include "variablerecord.h"
 #include "structdesc.h"
 //#include "PreCompiled.h"
-namespace Language {
+namespace PyLanguage {
 
     using TypeNamePair = std::pair<QString, QString>;
 
@@ -27,13 +27,13 @@ namespace Language {
         static std::unique_ptr<SymbolTable> _instance;
         static std::once_flag _onceFlag;
 
-        Language::FunctionNode* _entrypoint;
+        PyLanguage::FunctionNode* _entrypoint;
         std::stack<ActivationRecord*> _activationRecordStack;
         std::stack<QVariant> _argumentStack;
 
 
-        std::map<QString, Language::FunctionNode*> _functions;
-        std::map<QString, Language::StructDescNode*> _structTypes;
+        std::map<QString, PyLanguage::FunctionNode*> _functions;
+        std::map<QString, PyLanguage::StructDescNode*> _structTypes;
         std::map<QString, VariableRecord> _variables;
         std::unordered_set<std::string> TypeNames{ "int","double","string","boolean","var" };
         std::map<QString, std::vector<TypeNamePair>> _structMembers;
@@ -45,18 +45,18 @@ namespace Language {
             return _variables;
         }
 
-        Language::FunctionNode* Function(QString* name);
+        PyLanguage::FunctionNode* Function(QString* name);
 
 
-        bool DefineFunction(QString* name, Language::FunctionNode* node);
-        bool DefineStructTypes(QString* ,Language::StructDescNode*);
+        bool DefineFunction(QString* name, PyLanguage::FunctionNode* node);
+        bool DefineStructTypes(QString* ,PyLanguage::StructDescNode*);
 
         bool DefineTypes(QString name);
         QString VariableType(QString name);
         bool DefineVariable(QString* name,enum_v_type type, QString v_type);
         void ClearVariables();
 
-        Language::FunctionNode* EntryPoint();
+        PyLanguage::FunctionNode* EntryPoint();
         ActivationRecord* GetActivationRecord();
         void PushAR();
         void PopAR();

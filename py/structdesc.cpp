@@ -4,7 +4,7 @@
 
 
 
-namespace Language
+namespace PyLanguage
 {
     StructDescNode::StructDescNode(IdentifierNode* id, ASTNode * body)
             : ASTNode(),

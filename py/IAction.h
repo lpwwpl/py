@@ -1,5 +1,5 @@
-#ifndef IACTION_H
-#define IACTION_H
+#ifndef PYIACTION_H
+#define PYIACTION_H
 
 //-------------------------------------------------------------------------------------------------
 #include <QMutex>

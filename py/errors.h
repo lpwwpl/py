@@ -1,5 +1,5 @@
-#ifndef ERRORS_H
-#define ERRORS_H
+#ifndef PYERRORS_H
+#define PYERRORS_H
 
 #define UNDEFINED_FUNCTION  "Undefined function. (Please keep in mind that this is a pretty simple implementation. Try defining the function before attempting to call it.) - "
 #define WRONG_NUMBER_OF_ARGUMENTS "Woops ! Wrong number of arguments in function call - "

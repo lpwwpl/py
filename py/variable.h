@@ -1,5 +1,5 @@
-#ifndef VARIABLENODE_H
-#define VARIABLENODE_H
+#ifndef PYVARIABLENODE_H
+#define PYVARIABLENODE_H
 
 #include "astnode.h"
 #include "dimnumnode.h"
@@ -16,7 +16,7 @@ enum enum_v_scope
 };
 
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport VariableNode: public ASTNode
     {

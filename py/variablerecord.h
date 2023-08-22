@@ -1,8 +1,8 @@
-#ifndef VARIABLERECORD_H
-#define VARIABLERECORD_H
+#ifndef PYVARIABLERECORD_H
+#define PYVARIABLERECORD_H
 #include "PreCompiled.h"
 
-namespace Language
+namespace PyLanguage
 {
 
 

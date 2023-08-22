@@ -16,7 +16,9 @@
 
 extern std::stack<std::string> fileNames;
 extern std::vector<std::string> libPaths;
-namespace Language
+extern std::string err;
+
+namespace PyLanguage
 {
 
 Translator::Translator()
@@ -36,7 +38,7 @@ void Translator::PrepareCommandLineArguments(const int argc, char **argv)
     SymbolTable::Instance().PushCommandLineArguments(argc-2, &argv[2]);
 }
 
-int Translator::parse(const QString& codestr)
+int Translator::parse(const QString& codestr, QString& err_qst)
 {    
     QFileInfo fileInfo(codestr);
     if (!fileInfo.exists())
@@ -46,7 +48,7 @@ int Translator::parse(const QString& codestr)
     if (!in_file.good())
     {
         std::cerr << BAD_SCRIPT_FILE << std::endl;
-        exit(EXIT_FAILURE);
+        return -1;
     }
     //fileNames.push("");       // Add the empty file name after last EOF.
     fileNames.push(codestr.toStdString()); // Add the top level file name.
@@ -55,8 +57,9 @@ int Translator::parse(const QString& codestr)
 
     if (parser.parse() != 0)
     {
+        err_qst = QString::fromStdString(err);
         std::cerr << "Parse failed!!\n";
-        return 0;
+        return -1;
     }
     
     DeclareListNode*  declares = SymbolTable::Instance()._declares;
@@ -66,7 +69,7 @@ int Translator::parse(const QString& codestr)
     {
         str += elem->toRaw();  
     }
-    //std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+    //std::map<QString, PyLanguage::ModuleNode*> modules = SymbolTable::Instance().Modules();
     //int count = modules.size();
 
 
@@ -74,7 +77,7 @@ int Translator::parse(const QString& codestr)
     //VisitorPyPrint visitor;
     //for (auto elem : modules)
     //{
-    //    Language::ModuleNode* module = elem.second;
+    //    PyLanguage::ModuleNode* module = elem.second;
 
     //    module->Accept(visitor);
 

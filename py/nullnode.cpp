@@ -3,7 +3,7 @@
 #include "symboltable.h"
 #include "errors.h"
 
-namespace Language
+namespace PyLanguage
 {
     NullNode::NullNode()
     {

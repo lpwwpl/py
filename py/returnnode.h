@@ -1,9 +1,9 @@
-#ifndef RETURNNODE_H
-#define RETURNNODE_H
+#ifndef PYRETURNNODE_H
+#define PYRETURNNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport ReturnNode: public ASTNode
     {
@@ -14,7 +14,7 @@ namespace Language
         void Accept(Visitor& v) override { v.VisitReturn(this); }
     public:
             ASTNode * _expression;
-            Language::location _location;
+            PyLanguage::location _location;
     };
 }
 

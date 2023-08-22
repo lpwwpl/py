@@ -4,7 +4,7 @@
 #include "arrayindex.h"
 
 
-namespace Language
+namespace PyLanguage
 {
     VariableNode::VariableNode(int e_scope, IdentifierNode* e_type, ASTNode* src, ASTNode* expression, location& loc) :ASTNode(), _e_scope(e_scope), _e_type(e_type), _src(src), _expression(expression), _location(loc)
     {

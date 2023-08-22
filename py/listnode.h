@@ -1,9 +1,9 @@
-#ifndef LISTNODE_H
-#define LISTNODE_H
+#ifndef PYLISTNODE_H
+#define PYLISTNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
 
     template <class T >

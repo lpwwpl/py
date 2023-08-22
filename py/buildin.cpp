@@ -3,7 +3,7 @@
 #include "symboltable.h"
 #include "errors.h"
 
-namespace Language
+namespace PyLanguage
 {
     BuildInNode::BuildInNode(QString* name, ASTNode* expresion) : _name(*name),
         _expression(expresion),_type(0)

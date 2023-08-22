@@ -4,7 +4,7 @@
 
 
 
-namespace Language
+namespace PyLanguage
 {
     FunctionNode::FunctionNode(ASTNode* type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body)
             : ASTNode(),

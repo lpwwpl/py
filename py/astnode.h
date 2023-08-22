@@ -1,5 +1,5 @@
-#ifndef ASTNODE_H
-#define ASTNODE_H
+#ifndef PYASTNODE_H
+#define PYASTNODE_H
 
 #include <QVariant>
 #include <sstream>
@@ -13,12 +13,12 @@
 #include "parser.tab.hpp"
 #include "variablerecord.h"
 
-typedef Language::Parser::token token;
+typedef PyLanguage::Parser::token token;
 #define SPACE " "
 #define INTENT "    "
 
 
-namespace Language
+namespace PyLanguage
 {
 
  
@@ -88,7 +88,7 @@ namespace Language
         virtual void Accept(Visitor& v) {}
         virtual QString toRaw(uint level = 0) { return ""; }
 
-        static void printError(Language::location location, std::string msg)
+        static void printError(PyLanguage::location location, std::string msg)
         {
             std::cerr
                 << location.end.filename

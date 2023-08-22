@@ -1,9 +1,9 @@
-#ifndef IDENTIFIERNODE_H
-#define IDENTIFIERNODE_H
+#ifndef PYIDENTIFIERNODE_H
+#define PYIDENTIFIERNODE_H
 
 #include "astnode.h"
 #include "listnode.h"
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport IdentifierNode : public ASTNode
     {
@@ -17,7 +17,7 @@ namespace Language
         QString getName() override { return _name; }
     public:
         QString _name;
-        Language::location location;
+        PyLanguage::location location;
         //bool isType = false;
     };
 }

@@ -1,7 +1,7 @@
 #include "statementlistnode.h"
 #include "returnnode.h"
 #include "symboltable.h"
-namespace Language
+namespace PyLanguage
 {
     StatementListNode::StatementListNode(ASTNode * parameter)
     {

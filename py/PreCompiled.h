@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ROBOTABB_PRECOMPILED_H
-#define ROBOTABB_PRECOMPILED_H
+#ifndef PYROBOTABB_PRECOMPILED_H
+#define PYROBOTABB_PRECOMPILED_H
 
 //#include <FCConfig.h>
 #define FC_OS_WIN32

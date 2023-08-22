@@ -1,5 +1,5 @@
-#ifndef AST_H
-#define AST_H
+#ifndef PYAST_H
+#define PYAST_H
 #include "cfloat"
 #include "functioncallnode.h"
 #include "declaration_list.h"

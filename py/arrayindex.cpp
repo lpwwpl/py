@@ -4,7 +4,7 @@
 
 
 
-namespace Language
+namespace PyLanguage
 {
     ArrayIndexNode::ArrayIndexNode(IdentifierNode* name,  ASTNode* elem):m_ident(name), m_exprs(elem)
     {

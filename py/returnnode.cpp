@@ -1,7 +1,7 @@
 #include "returnnode.h"
 #include "symboltable.h"
 
-namespace Language
+namespace PyLanguage
 {
     ReturnNode::ReturnNode(ASTNode * expression)
         : _expression(expression)

@@ -1,9 +1,9 @@
-#ifndef VisitorPyPrint_h__
-#define VisitorPyPrint_h__
+#ifndef PYVisitorPyPrint_h__
+#define PYVisitorPyPrint_h__
 
 #include "Visitor.h"
 #include <QString>
-namespace Language {
+namespace PyLanguage {
 
 	class VisitorPyPrint : public Visitor
 	{

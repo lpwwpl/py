@@ -4,7 +4,7 @@
 
 
 
-namespace Language
+namespace PyLanguage
 {
     OperatorNode::OperatorNode(token::yytokentype type, ASTNode * op1, ASTNode * op2)
         : _op1(op1),

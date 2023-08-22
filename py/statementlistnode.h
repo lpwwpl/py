@@ -1,10 +1,10 @@
-#ifndef STATEMENTLISTNODE_H
-#define STATEMENTLISTNODE_H
+#ifndef PYSTATEMENTLISTNODE_H
+#define PYSTATEMENTLISTNODE_H
 
 #include "astnode.h"
 #include "listnode.h"
 
-namespace Language
+namespace PyLanguage
 {
 class RobotAbbExport StatementListNode: public ListNode<ASTNode>
 {

@@ -1,9 +1,9 @@
-#ifndef ASSIGNMENTNODE_H
-#define ASSIGNMENTNODE_H
+#ifndef PYASSIGNMENTNODE_H
+#define PYASSIGNMENTNODE_H
 
 #include "astnode.h"
 #include "dimnumnode.h"
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport AssignmentNode: public ASTNode
     {

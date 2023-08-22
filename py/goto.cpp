@@ -4,7 +4,7 @@
 #include "errors.h"
 #include "listnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     GotoNode::GotoNode(ASTNode* expression)
         : ASTNode(), _expression(expression)
@@ -35,7 +35,7 @@ namespace Language
         this->_topParent = SymbolTable::Instance().GetActivationRecord()->GetCurNode();
         //std::cout << QString("%1 %2").arg("goto").arg(_expression->Execute().toString()).toStdString() << std::endl;
         //std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
-        Language::FunctionNode* func = SymbolTable::Instance().GetActivationRecord()->GetCurFunctionNode();
+        PyLanguage::FunctionNode* func = SymbolTable::Instance().GetActivationRecord()->GetCurFunctionNode();
         if (!func) return QVariant();
         StatementListNode* body = (func->GetBody());
 

@@ -1,7 +1,7 @@
 #include "ifnode.h"
 #include "listnode.h"
 #include "elseifnode.h"
-namespace Language
+namespace PyLanguage
 {
     IfNode::IfNode(ASTNode * expression, ASTNode * bodyTrue, ASTNode * bodyFalse)
         : ASTNode(),_bodyTrue(bodyTrue),

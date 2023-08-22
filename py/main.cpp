@@ -1,5 +1,5 @@
 /*===========================================================================
-    CLIPSEditor, editor for CLIPS (C Language Integrated Production System)
+    CLIPSEditor, editor for CLIPS (C PyLanguage Integrated Production System)
     Copyright (C) 2012-2018 Artem G. Novikov
 
     This program is free software: you can redistribute it and/or modify
@@ -123,11 +123,13 @@ int main(int argc, /*const*/ char** argv)
 
     //QApplication app(argc, argv);
     //parser.process(app);
+    QString err;
     QString src = "D:/py.txt";//parser.value(srcOption);
-     Language::Translator translator;
-     return(translator.parse(src));
+     PyLanguage::Translator translator;
+     int ret = (translator.parse(src, err));
+     return ret;
 
-     //Language::Translator translator;
+     //PyLanguage::Translator translator;
      //return(translator.parse(argc, argv));
      /*
     try

@@ -1,7 +1,7 @@
 #include "fornode.h"
 #include "assignmentnode.h"
 #include "symboltable.h"
-namespace Language
+namespace PyLanguage
 {
     ForNode::ForNode(ASTNode * assignment, ASTNode* from_expression,ASTNode * to_expression, ASTNode* step, ASTNode * function_body)
         : ASTNode(),_assignment(assignment),_from_expression(from_expression),

@@ -1,9 +1,9 @@
-#ifndef GOTONODE_H
-#define GOTONODE_H
+#ifndef PYGOTONODE_H
+#define PYGOTONODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport GotoNode : public ASTNode
     {

@@ -32,7 +32,7 @@
 
 /**
  ** \file D:\source\repos\py\\py\location.hh
- ** Define the Language::location class.
+ ** Define the PyLanguage::location class.
  */
 
 #ifndef YY_P_YY_D_SOURCE_REPOS_PY_PY_LOCATION_HH_INCLUDED
@@ -54,7 +54,7 @@
 # endif
 
 #line 15 "parser.y"
-namespace Language {
+namespace PyLanguage {
 #line 59 "D:\\source\\repos\\py\\\\py\\location.hh"
 
   /// A point in a source file.
@@ -300,7 +300,7 @@ namespace Language {
   }
 
 #line 15 "parser.y"
-} // Language
+} // PyLanguage
 #line 305 "D:\\source\\repos\\py\\\\py\\location.hh"
 
 #endif // !YY_P_YY_D_SOURCE_REPOS_PY_PY_LOCATION_HH_INCLUDED

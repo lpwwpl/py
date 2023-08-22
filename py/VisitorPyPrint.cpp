@@ -1,6 +1,6 @@
 
 #include "VisitorPyPrint.h"
-using namespace Language;
+using namespace PyLanguage;
 
 #include "ast.h"
 

@@ -1,10 +1,10 @@
-#ifndef LABELNODE_H
-#define LABELNODE_H
+#ifndef PYLABELNODE_H
+#define PYLABELNODE_H
 
 #include "astnode.h"
 #include "listnode.h"
 
-namespace Language
+namespace PyLanguage
 {
 class RobotAbbExport LabelNode: public ASTNode
 {

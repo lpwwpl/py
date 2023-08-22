@@ -1,9 +1,9 @@
-#ifndef PARAMETERNODE_H
-#define PARAMETERNODE_H
+#ifndef PYPARAMETERNODE_H
+#define PYPARAMETERNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport ParameterNode: public ASTNode
     {

@@ -1,9 +1,9 @@
-#ifndef IFNODE_H
-#define IFNODE_H
+#ifndef PYIFNODE_H
+#define PYIFNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport IfNode: public ASTNode
     {

@@ -1,6 +1,6 @@
 
 #include "VisitorTypeCheck.h"
-using namespace Language;
+using namespace PyLanguage;
 
 #include "ast.h"
 

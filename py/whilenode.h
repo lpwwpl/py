@@ -1,9 +1,9 @@
-#ifndef WHILENODE_H
-#define WHILENODE_H
+#ifndef PYWHILENODE_H
+#define PYWHILENODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport WhileNode: public ASTNode
     {

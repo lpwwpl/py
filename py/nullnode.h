@@ -1,9 +1,9 @@
-#ifndef NULLNODE_H
-#define NULLNODE_H
+#ifndef PYNULLNODE_H
+#define PYNULLNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport NullNode : public ASTNode
     {

@@ -50,11 +50,12 @@
     #include "ast.h"
     #include <stack>
     
-    static int yylex(Language::Parser::semantic_type *yylval, Language::location* loc,Language::Lexer  &lexer);
+    static int yylex(PyLanguage::Parser::semantic_type *yylval, PyLanguage::location* loc,PyLanguage::Lexer  &lexer);
 
+    std::string err;
     extern std::string cur_yytext;
     extern std::stack<std::string> fileNames;
-    extern Language::location loc;//声明位置实例
+    extern PyLanguage::location loc;//声明位置实例
     # define YYLLOC_DEFAULT(Current, Rhs, N)                                \
     do                                                                  \
       if (N)                                                            \
@@ -76,7 +77,7 @@
     while (0)
 
 
-#line 80 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 81 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
 
 
 #ifndef YY_
@@ -168,8 +169,8 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 #line 15 "parser.y"
-namespace Language {
-#line 173 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+namespace PyLanguage {
+#line 174 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
 
   /// Build a parser object.
   Parser::Parser (Lexer  &lexer_yyarg)
@@ -640,487 +641,487 @@ namespace Language {
           switch (yyn)
             {
   case 2: // program: declaration_list
-#line 160 "parser.y"
+#line 161 "parser.y"
                      {}
-#line 646 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 647 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 3: // declaration_list: declaration
-#line 164 "parser.y"
+#line 165 "parser.y"
                  {(yylhs.value.listNode) = new DeclareListNode((yystack_[0].value.pNode));}
-#line 652 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 653 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 4: // declaration_list: declaration_list declaration
-#line 165 "parser.y"
+#line 166 "parser.y"
                                      {(yystack_[1].value.listNode)->push_back((yystack_[0].value.pNode));}
-#line 658 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 659 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 5: // declaration: function_declaration
-#line 169 "parser.y"
+#line 170 "parser.y"
                          {(yylhs.value.pNode)=(yystack_[0].value.functionNode);}
-#line 664 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 665 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 6: // declaration: var_assignment
-#line 170 "parser.y"
+#line 171 "parser.y"
                     {(yylhs.value.pNode)=(yystack_[0].value.pNode);}
-#line 670 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 671 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 7: // declaration: Class_declare
-#line 171 "parser.y"
+#line 172 "parser.y"
                     {(yylhs.value.pNode)=(yystack_[0].value.pNode);}
-#line 676 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 677 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 8: // Class_declare: CLASS Identifier COLON declaration
-#line 176 "parser.y"
+#line 177 "parser.y"
                                         { IdentifierNode* id = new IdentifierNode((yystack_[2].value.sval));(yylhs.value.pNode) = new StructDescNode(id, (yystack_[0].value.pNode)); }
-#line 682 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 683 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 9: // Class_declare: CLASS Identifier LC struct_index RC COLON declaration
-#line 178 "parser.y"
+#line 179 "parser.y"
                                                            { IdentifierNode* id = new IdentifierNode((yystack_[5].value.sval));(yylhs.value.pNode) = new StructDescNode(id, (yystack_[3].value.pNode),(yystack_[0].value.pNode)); }
-#line 688 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 689 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 10: // function_declaration: DEF Identifier LC parameter_declaration_list RC COLON block
-#line 185 "parser.y"
+#line 186 "parser.y"
     {
         (yylhs.value.functionNode) = new FunctionNode(NULL, (yystack_[5].value.sval), (yystack_[3].value.parameterListNode), (yystack_[0].value.statementListNode)); 
     }
-#line 696 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 697 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 11: // parameter_declaration_list: parameter_declaration
-#line 191 "parser.y"
+#line 192 "parser.y"
                           { (yylhs.value.parameterListNode) = new ListNode<ParameterNode>((yystack_[0].value.parameterNode)); }
-#line 702 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 703 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 12: // parameter_declaration_list: parameter_declaration_list COMMA parameter_declaration
-#line 192 "parser.y"
+#line 193 "parser.y"
                                                              {(yystack_[2].value.parameterListNode)->push_back((yystack_[0].value.parameterNode));}
-#line 708 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 709 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 13: // parameter_declaration_list: %empty
-#line 193 "parser.y"
+#line 194 "parser.y"
       {(yylhs.value.parameterListNode) = new ListNode<ParameterNode>();}
-#line 714 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 715 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 14: // parameter_declaration: var_expression
-#line 197 "parser.y"
+#line 198 "parser.y"
                    {(yylhs.value.parameterNode) = new ParameterNode((yystack_[0].value.pNode),nullptr);}
-#line 720 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 721 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 15: // func_call_parameter_list: expression
-#line 202 "parser.y"
+#line 203 "parser.y"
     {
         (yylhs.value.listNode) = new ListNode<ASTNode>((yystack_[0].value.pNode)); 
     }
-#line 728 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 729 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 16: // func_call_parameter_list: func_call_parameter_list COMMA expression
-#line 206 "parser.y"
+#line 207 "parser.y"
         {
         (yystack_[2].value.listNode)->push_back((yystack_[0].value.pNode));   
 	}
-#line 736 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 737 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 17: // block: statement_list
-#line 211 "parser.y"
+#line 212 "parser.y"
                          { (yylhs.value.statementListNode) = (yystack_[0].value.statementListNode); }
-#line 742 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 743 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 18: // statement_list: statement
-#line 216 "parser.y"
+#line 217 "parser.y"
               {(yylhs.value.statementListNode) = new StatementListNode((yystack_[0].value.pNode));}
-#line 748 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 749 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 19: // statement_list: statement_list statement
-#line 217 "parser.y"
+#line 218 "parser.y"
                                {(yystack_[1].value.statementListNode)->push_back((yystack_[0].value.pNode));}
-#line 754 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 755 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 20: // function_call: Identifier LC func_call_parameter_list RC
-#line 221 "parser.y"
+#line 222 "parser.y"
                                                 { (yylhs.value.pNode) = new FunctionCallNode((yystack_[3].value.sval), (yystack_[1].value.listNode));}
-#line 760 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 761 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 21: // function_call: Identifier LC RC
-#line 222 "parser.y"
+#line 223 "parser.y"
                          { (yylhs.value.pNode) = new FunctionCallNode((yystack_[2].value.sval), NULL);}
-#line 766 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 767 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 22: // statement: assignment
-#line 226 "parser.y"
+#line 227 "parser.y"
                  {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 772 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 773 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 23: // statement: if
-#line 227 "parser.y"
+#line 228 "parser.y"
          { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 778 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 779 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 24: // statement: while_loop
-#line 228 "parser.y"
+#line 229 "parser.y"
                  { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 784 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 785 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 25: // statement: for
-#line 229 "parser.y"
+#line 230 "parser.y"
           { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 790 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 791 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 26: // statement: return
-#line 230 "parser.y"
+#line 231 "parser.y"
               { (yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 796 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 797 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 27: // statement: function_call
-#line 231 "parser.y"
+#line 232 "parser.y"
                     {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 802 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 803 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 28: // statement: BREAK
-#line 232 "parser.y"
+#line 233 "parser.y"
             {(yylhs.value.pNode) = new BreakNode();}
-#line 808 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 809 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 29: // statement: CONTINUE
-#line 233 "parser.y"
+#line 234 "parser.y"
                 {(yylhs.value.pNode) = new ContinueNode();}
-#line 814 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 815 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 30: // statement: PASS
-#line 234 "parser.y"
+#line 235 "parser.y"
            {(yylhs.value.pNode) = new PassNode();}
-#line 820 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 821 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 31: // return: RETURN
-#line 238 "parser.y"
+#line 239 "parser.y"
         {(yylhs.value.pNode) = new ReturnNode(NULL); }
-#line 826 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 827 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 32: // return: RETURN expression
-#line 239 "parser.y"
+#line 240 "parser.y"
                        {(yylhs.value.pNode) = new ReturnNode((yystack_[0].value.pNode)); }
-#line 832 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 833 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 33: // while_loop: WHILE expression COLON block
-#line 243 "parser.y"
+#line 244 "parser.y"
                                                { (yylhs.value.pNode) = new WhileNode((yystack_[2].value.pNode), (yystack_[0].value.statementListNode)); }
-#line 838 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 839 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 34: // for_expression: RANGE LC dim_num_stm RC
-#line 248 "parser.y"
+#line 249 "parser.y"
                             { (yylhs.value.pNode) = new ForExprNode((yystack_[1].value.dim_num_stmNode));}
-#line 844 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 845 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 35: // for_expression: Identifier
-#line 250 "parser.y"
+#line 251 "parser.y"
                { IdentifierNode* id = new IdentifierNode((yystack_[0].value.sval));(yylhs.value.pNode) = new ForExprNode(id);}
-#line 850 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 851 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 36: // for_expression: LR dim_num_stm RR
-#line 252 "parser.y"
+#line 253 "parser.y"
                       { (yylhs.value.pNode) = new ForExprNode((yystack_[1].value.dim_num_stmNode));}
-#line 856 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 857 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 37: // for: FOR Identifier IN for_expression COLON block
-#line 256 "parser.y"
+#line 257 "parser.y"
                                                   {  IdentifierNode* id = new IdentifierNode((yystack_[4].value.sval));(yylhs.value.pNode) = new ForNode(id,(yystack_[2].value.pNode),(yystack_[0].value.statementListNode));}
-#line 862 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 863 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 38: // if: IF expression COLON block
-#line 260 "parser.y"
+#line 261 "parser.y"
                                  { (yylhs.value.pNode) = new IfNode((yystack_[2].value.pNode), (yystack_[0].value.statementListNode)); }
-#line 868 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 869 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 39: // if: IF expression COLON block elseif_statment_list
-#line 261 "parser.y"
+#line 262 "parser.y"
                                                       { (yylhs.value.pNode) = new IfNode((yystack_[3].value.pNode), (yystack_[1].value.statementListNode), (yystack_[0].value.elseifListNode)); }
-#line 874 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 875 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 40: // elseif_statment_list: elseif_statment
-#line 265 "parser.y"
+#line 266 "parser.y"
                      {(yylhs.value.elseifListNode) = new ListNode<ElseIfNode>((yystack_[0].value.elseif_stmNode));}
-#line 880 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 881 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 41: // elseif_statment_list: elseif_statment_list elseif_statment
-#line 266 "parser.y"
+#line 267 "parser.y"
                                            {(yystack_[1].value.elseifListNode)->push_back((yystack_[0].value.elseif_stmNode));}
-#line 886 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 887 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 42: // elseif_statment: ELSE COLON block
-#line 270 "parser.y"
+#line 271 "parser.y"
                       { (yylhs.value.elseif_stmNode) = new ElseIfNode((yystack_[0].value.statementListNode)); }
-#line 892 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 893 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 43: // elseif_statment: ELIF expression COLON block
-#line 271 "parser.y"
+#line 272 "parser.y"
                                   { (yylhs.value.elseif_stmNode) = new ElseIfNode((yystack_[2].value.pNode), (yystack_[0].value.statementListNode)); }
-#line 898 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 899 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 44: // var_expression: Identifier
-#line 276 "parser.y"
+#line 277 "parser.y"
                { (yylhs.value.pNode) = new IdentifierNode((yystack_[0].value.sval)); }
-#line 904 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 905 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 45: // var_expression: array_index
-#line 277 "parser.y"
+#line 278 "parser.y"
                   { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 910 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 911 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 46: // var_expression: struct_index
-#line 278 "parser.y"
+#line 279 "parser.y"
                    {(yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 916 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 917 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 47: // var_assignment: Identifier ASS expression
-#line 283 "parser.y"
+#line 284 "parser.y"
                                { IdentifierNode* id = new IdentifierNode((yystack_[2].value.sval));(yylhs.value.pNode) = new VariableNode(0,nullptr,id,(yystack_[0].value.pNode),loc);}
-#line 922 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 923 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 48: // var_assignment: array_index ASS expression
-#line 284 "parser.y"
+#line 285 "parser.y"
                                    { (yylhs.value.pNode) = new VariableNode(0,nullptr,(yystack_[2].value.pNode),(yystack_[0].value.pNode),loc);}
-#line 928 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 929 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 49: // var_assignment: struct_index ASS expression
-#line 285 "parser.y"
+#line 286 "parser.y"
                                    { (yylhs.value.pNode) = new VariableNode(0,nullptr,(yystack_[2].value.pNode),(yystack_[0].value.pNode),loc);}
-#line 934 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 935 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 50: // assignment: var_expression ASS expression
-#line 292 "parser.y"
+#line 293 "parser.y"
     { 
         (yylhs.value.pNode) = new AssignmentNode((yystack_[2].value.pNode), (yystack_[0].value.pNode));
     }
-#line 942 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 943 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 51: // dim_num_stm: expression
-#line 300 "parser.y"
+#line 301 "parser.y"
     {
         (yylhs.value.dim_num_stmNode) = new DimNumsNode((yystack_[0].value.pNode)); 
     }
-#line 950 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 951 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 52: // dim_num_stm: dim_num_stm COMMA expression
-#line 304 "parser.y"
+#line 305 "parser.y"
         {
        (yystack_[2].value.dim_num_stmNode)->push_back((yystack_[0].value.pNode));   
 	}
-#line 958 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 959 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 53: // struct_index: var_expression DOT Identifier
-#line 310 "parser.y"
+#line 311 "parser.y"
                                    { IdentifierNode* id = new IdentifierNode((yystack_[0].value.sval));(yylhs.value.pNode) = new StructIndexNode((yystack_[2].value.pNode),id); }
-#line 964 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 965 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 54: // array_index: Identifier LBRACE expression RBRACE
-#line 314 "parser.y"
+#line 315 "parser.y"
                                      {IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new ArrayIndexNode(id, (yystack_[1].value.pNode));}
-#line 970 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 971 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 55: // op_expr: expression ADD expression
-#line 319 "parser.y"
+#line 320 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::ADD, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 976 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 977 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 56: // op_expr: expression SUB expression
-#line 320 "parser.y"
+#line 321 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::SUB, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 982 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 983 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 57: // op_expr: SUB expression
-#line 321 "parser.y"
+#line 322 "parser.y"
                                { (yylhs.value.pNode) = new OperatorNode(token::UMINUS, (yystack_[0].value.pNode)); }
-#line 988 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 989 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 58: // op_expr: expression MUL expression
-#line 322 "parser.y"
+#line 323 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::MUL, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 994 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 995 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 59: // op_expr: expression LT expression
-#line 323 "parser.y"
+#line 324 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::LT, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1000 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1001 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 60: // op_expr: expression GT expression
-#line 324 "parser.y"
+#line 325 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::GT, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1006 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1007 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 61: // op_expr: expression GE expression
-#line 325 "parser.y"
+#line 326 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::GE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1012 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1013 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 62: // op_expr: expression LE expression
-#line 326 "parser.y"
+#line 327 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::LE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1018 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1019 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 63: // op_expr: expression NE expression
-#line 327 "parser.y"
+#line 328 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::NE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1024 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1025 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 64: // op_expr: expression EQ expression
-#line 328 "parser.y"
+#line 329 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::EQ, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1030 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1031 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 65: // op_expr: expression AND expression
-#line 329 "parser.y"
+#line 330 "parser.y"
                              {(yylhs.value.pNode) = new OperatorNode(token::AND, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1036 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1037 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 66: // op_expr: expression OR expression
-#line 330 "parser.y"
+#line 331 "parser.y"
                             {(yylhs.value.pNode) = new OperatorNode(token::OR, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1042 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1043 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 67: // op_expr: expression MOD expression
-#line 331 "parser.y"
+#line 332 "parser.y"
                              {(yylhs.value.pNode) = new OperatorNode(token::MOD, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1048 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1049 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 68: // op_expr: NOT expression
-#line 334 "parser.y"
+#line 335 "parser.y"
                               {(yylhs.value.pNode) = new OperatorNode(token::NOT, (yystack_[0].value.pNode));}
-#line 1054 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1055 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 69: // op_expr: LC expression RC
-#line 335 "parser.y"
+#line 336 "parser.y"
                     {(yylhs.value.pNode) = (yylhs.value.pNode) = new OperatorNode(token::LC, (yystack_[1].value.pNode));}
-#line 1060 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1061 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 70: // expression: String
-#line 341 "parser.y"
+#line 342 "parser.y"
         { (yylhs.value.pNode) = new StringLiteralNode((yystack_[0].value.sval));}
-#line 1066 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1067 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 71: // expression: FNULL
-#line 342 "parser.y"
+#line 343 "parser.y"
          { (yylhs.value.pNode) = new NullNode();}
-#line 1072 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1073 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 72: // expression: Number
-#line 343 "parser.y"
+#line 344 "parser.y"
           {(yylhs.value.pNode) = new NumberLiteralNode((yystack_[0].value.dval)); }
-#line 1078 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1079 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 73: // expression: LNumber
-#line 344 "parser.y"
+#line 345 "parser.y"
            {(yylhs.value.pNode) = new Integer((yystack_[0].value.ival)); }
-#line 1084 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1085 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 74: // expression: FTRUE
-#line 345 "parser.y"
+#line 346 "parser.y"
          {(yylhs.value.pNode) = new Boolean(1);}
-#line 1090 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1091 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 75: // expression: FFALSE
-#line 346 "parser.y"
+#line 347 "parser.y"
           {(yylhs.value.pNode) = new Boolean(0);}
-#line 1096 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1097 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 76: // expression: var_expression
-#line 347 "parser.y"
+#line 348 "parser.y"
                   {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1102 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1103 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 77: // expression: op_expr
-#line 348 "parser.y"
+#line 349 "parser.y"
            {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1108 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1109 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 78: // expression: function_call
-#line 349 "parser.y"
+#line 350 "parser.y"
                   { (yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1114 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1115 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
   case 79: // expression: LR dim_num_stm RR
-#line 350 "parser.y"
+#line 351 "parser.y"
                      {(yylhs.value.pNode) = (yystack_[1].value.dim_num_stmNode);}
-#line 1120 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1121 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
     break;
 
 
-#line 1124 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+#line 1125 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
 
             default:
               break;
@@ -1684,14 +1685,14 @@ namespace Language {
   const short
   Parser::yyrline_[] =
   {
-       0,   160,   160,   164,   165,   169,   170,   171,   176,   178,
-     184,   191,   192,   193,   197,   201,   205,   211,   216,   217,
-     221,   222,   226,   227,   228,   229,   230,   231,   232,   233,
-     234,   238,   239,   243,   248,   250,   252,   256,   260,   261,
-     265,   266,   270,   271,   276,   277,   278,   283,   284,   285,
-     291,   299,   303,   310,   314,   319,   320,   321,   322,   323,
-     324,   325,   326,   327,   328,   329,   330,   331,   334,   335,
-     341,   342,   343,   344,   345,   346,   347,   348,   349,   350
+       0,   161,   161,   165,   166,   170,   171,   172,   177,   179,
+     185,   192,   193,   194,   198,   202,   206,   212,   217,   218,
+     222,   223,   227,   228,   229,   230,   231,   232,   233,   234,
+     235,   239,   240,   244,   249,   251,   253,   257,   261,   262,
+     266,   267,   271,   272,   277,   278,   279,   284,   285,   286,
+     292,   300,   304,   311,   315,   320,   321,   322,   323,   324,
+     325,   326,   327,   328,   329,   330,   331,   332,   335,   336,
+     342,   343,   344,   345,   346,   347,   348,   349,   350,   351
   };
 
   void
@@ -1775,18 +1776,22 @@ namespace Language {
   }
 
 #line 15 "parser.y"
-} // Language
-#line 1780 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
+} // PyLanguage
+#line 1781 "D:\\source\\repos\\py\\\\py\\parser.tab.cpp"
 
-#line 354 "parser.y"
+#line 355 "parser.y"
 
 
 
-static int yylex( Language::Parser::semantic_type *yylval,Language::location* loc,Language::Lexer  &lexer)
+static int yylex( PyLanguage::Parser::semantic_type *yylval,PyLanguage::location* loc,PyLanguage::Lexer  &lexer)
 {
    return( lexer.yylex(yylval,loc) );
 }
-void Language::Parser::error( const Language::location& location,const std::string &err_message )
+void PyLanguage::Parser::error( const PyLanguage::location& location,const std::string &err_message )
 {
-    printf("error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());   
+    char format_str[128] = { 0 };
+	snprintf(format_str, sizeof(format_str) - 1, "error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());
+    
+    err=std::string(format_str);
+    printf("%s",format_str); 
 }

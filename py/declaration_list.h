@@ -1,9 +1,9 @@
-#ifndef DECLARELISTNODE_H
-#define DECLARELISTNODE_H
+#ifndef PYDECLARELISTNODE_H
+#define PYDECLARELISTNODE_H
 
 #include "astnode.h"
 #include "listnode.h"
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport DeclareListNode : public ListNode<ASTNode>
     {

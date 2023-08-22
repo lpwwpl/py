@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <fstream>
 #include "lexer.hpp"
-typedef Language::Parser::token token;
+typedef PyLanguage::Parser::token token;
 #define yyterminate() return( token::END )
 #define YY_NO_UNISTD_H // For msvc
 
@@ -16,10 +16,10 @@ typedef Language::Parser::token token;
 
 
 
-using namespace Language;
+using namespace PyLanguage;
 
 #define YYERROR_VERBOSE 1
-Language::location loc;//声明位置实例
+PyLanguage::location loc;//声明位置实例
 
 std::string cur_yytext;
 std::string g_str;

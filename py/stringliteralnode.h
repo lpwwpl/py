@@ -1,9 +1,9 @@
-#ifndef STRINGLITERALNODE_H
-#define STRINGLITERALNODE_H
+#ifndef PYSTRINGLITERALNODE_H
+#define PYSTRINGLITERALNODE_H
 
 #include "astnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     class RobotAbbExport StringLiteralNode : public ASTNode
     {

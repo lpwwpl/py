@@ -12,14 +12,14 @@
 %locations /* track locations: @n of component N; @$ of entire range */
 
 %define api.prefix {P_yy}
-%define api.namespace {Language}
+%define api.namespace {PyLanguage}
 %define parser_class_name {Parser}
 %define parse.error verbose
 
 
 %code requires{
 
-   namespace Language {
+   namespace PyLanguage {
       class Translator;
       class Lexer;
       class ASTNode;
@@ -60,11 +60,12 @@
     #include "ast.h"
     #include <stack>
     
-    static int yylex(Language::Parser::semantic_type *yylval, Language::location* loc,Language::Lexer  &lexer);
+    static int yylex(PyLanguage::Parser::semantic_type *yylval, PyLanguage::location* loc,PyLanguage::Lexer  &lexer);
 
+    std::string err;
     extern std::string cur_yytext;
     extern std::stack<std::string> fileNames;
-    extern Language::location loc;//声明位置实例
+    extern PyLanguage::location loc;//声明位置实例
     # define YYLLOC_DEFAULT(Current, Rhs, N)                                \
     do                                                                  \
       if (N)                                                            \
@@ -354,11 +355,15 @@ expression:
 %%
 
 
-static int yylex( Language::Parser::semantic_type *yylval,Language::location* loc,Language::Lexer  &lexer)
+static int yylex( PyLanguage::Parser::semantic_type *yylval,PyLanguage::location* loc,PyLanguage::Lexer  &lexer)
 {
    return( lexer.yylex(yylval,loc) );
 }
-void Language::Parser::error( const Language::location& location,const std::string &err_message )
+void PyLanguage::Parser::error( const PyLanguage::location& location,const std::string &err_message )
 {
-    printf("error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());   
+    char format_str[128] = { 0 };
+	snprintf(format_str, sizeof(format_str) - 1, "error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());
+    
+    err=std::string(format_str);
+    printf("%s",format_str); 
 }

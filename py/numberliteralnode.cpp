@@ -1,6 +1,6 @@
 #include "numberliteralnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     NumberLiteralNode::NumberLiteralNode(double value)
         : ASTNode(),

@@ -1,9 +1,9 @@
-#ifndef Visitor_h__
-#define Visitor_h__
+#ifndef PYVisitor_h__
+#define PYVisitor_h__
 
 
 
-namespace Language {
+namespace PyLanguage {
 	class IdentifierNode;
 	class ArrayIndexNode;
 	class AssignmentNode;	

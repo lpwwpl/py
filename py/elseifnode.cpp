@@ -1,6 +1,6 @@
 #include "elseifnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     ElseIfNode::ElseIfNode(ASTNode * expression, ASTNode * bodyTrue)
         : _body(bodyTrue),

@@ -2,7 +2,7 @@
 #include "returnnode.h"
 #include "symboltable.h"
 
-namespace Language
+namespace PyLanguage
 {
     LabelNode::LabelNode(ASTNode* id) : _id(id)
     {

@@ -1,5 +1,5 @@
-#ifndef __LEXER_HPP__
-#define __LEXER_HPP__
+#ifndef PY__LEXER_HPP__
+#define PY__LEXER_HPP__
 
 #if ! defined(yyFlexLexerOnce)
 #undef yyFlexLexer
@@ -12,11 +12,11 @@
 //#endif
 
 #undef  YY_DECL
-#define YY_DECL int  Language::Lexer::yylex()
+#define YY_DECL int  PyLanguage::Lexer::yylex()
 
 #include "parser.tab.hpp"
 #include "location.hh"
-namespace Language
+namespace PyLanguage
 {
 
 class Lexer : public yyFlexLexer{
@@ -27,7 +27,7 @@ public:
 
 
 
-   int yylex(Parser::semantic_type *lval, Language::location* loc)
+   int yylex(Parser::semantic_type *lval, PyLanguage::location* loc)
    {
       yylval = lval; 
       yyloc = loc;
@@ -38,7 +38,7 @@ private:
    int yylex();
 
    Parser::semantic_type *yylval;
-   Language::location* yyloc;
+   PyLanguage::location* yyloc;
 };
 
 }

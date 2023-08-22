@@ -1,6 +1,6 @@
 #include "stringliteralnode.h"
 
-namespace Language
+namespace PyLanguage
 {
     StringLiteralNode::StringLiteralNode(QString * value)
         : ASTNode()

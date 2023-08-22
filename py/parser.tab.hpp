@@ -33,7 +33,7 @@
 
 /**
  ** \file D:\source\repos\py\\py\parser.tab.hpp
- ** Define the Language::parser class.
+ ** Define the PyLanguage::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -53,7 +53,7 @@
 #line 20 "parser.y"
 
 
-   namespace Language {
+   namespace PyLanguage {
       class Translator;
       class Lexer;
       class ASTNode;
@@ -224,7 +224,7 @@
 #endif  /* ! defined P_YYDEBUG */
 
 #line 15 "parser.y"
-namespace Language {
+namespace PyLanguage {
 #line 229 "D:\\source\\repos\\py\\\\py\\parser.tab.hpp"
 
 
@@ -243,7 +243,7 @@ namespace Language {
     /// Symbol semantic values.
     union value_type
     {
-#line 92 "parser.y"
+#line 93 "parser.y"
 
    QString *sval;
    double dval;
@@ -991,7 +991,7 @@ namespace Language {
 
 
 #line 15 "parser.y"
-} // Language
+} // PyLanguage
 #line 996 "D:\\source\\repos\\py\\\\py\\parser.tab.hpp"
 
 

@@ -4,7 +4,7 @@
 
 
 
-namespace Language
+namespace PyLanguage
 {
     StructIndexNode::StructIndexNode(ASTNode* left, IdentifierNode* right/*dimListType* dim*/):_left(left),  _right(right)
     {
