@@ -171,7 +171,7 @@ import              BEGIN(incl);
                    }
                  }
 
-<normal>"\n"     { current_line_indent = 0; BEGIN( indent); printf("xxx");yycolumn = 1; }
+<normal>"\n"     { current_line_indent = 0; BEGIN( indent); yycolumn = 1; }
 <<EOF>>          {
                    if( curr_indents.size() > 1 ) {
                         curr_indents.pop();
@@ -208,7 +208,7 @@ import              BEGIN(incl);
 <str>\\\"       g_str += "\"";
 <qstr>\\\'      g_str += "'";
 
-<str,qstr>\\(.|\n)  {g_str += yytext[1]; cur_yytext=yytext[1];}
+<str,qstr>.  {g_str += yytext; cur_yytext=yytext;}
 
 <str>[^\\\"]+  {g_str += std::string(yytext);cur_yytext=yytext;}
 <qstr>[^\\']+  {g_str += std::string(yytext);cur_yytext=yytext;}

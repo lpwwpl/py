@@ -62,7 +62,7 @@ namespace Language
         }
         //str.append("self.");
         str.append(_name);
-        str.append("(");
+        str.append(" ");
         if (_expressionList)
         {
             for (size_t i = 0; i < _expressionList->size(); i++)
@@ -89,7 +89,7 @@ namespace Language
                 str = str.mid(0, str.size() - 1);
             }
         }
-        str.append(");");
+        str.append(" ;");
         return str;
     }
 }
