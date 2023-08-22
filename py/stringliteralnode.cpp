@@ -5,7 +5,7 @@ namespace Language
     StringLiteralNode::StringLiteralNode(QString * value)
         : ASTNode()
     {
-       // _value = value->mid(1, value->length() - 2);
+        _value = *value;// ->mid(1, value->length() - 2);
     }
 
     QVariant StringLiteralNode::Execute()
