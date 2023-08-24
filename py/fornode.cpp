@@ -57,6 +57,7 @@ namespace PyLanguage
         str.append("do");
         str.append("\n");
         level = level + 1;
+        if(_function_body)
         str.append(_function_body->toRaw(level));
         str.append("endfor");
         str.append("\n");

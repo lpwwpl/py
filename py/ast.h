@@ -40,5 +40,6 @@
 #include "structindexnode.h"
 #include "arrayindex.h"
 #include "dimnumnode.h"
+#include "funccalllistnode.h"
 #endif // AST_H
 

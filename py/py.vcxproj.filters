@@ -131,6 +131,9 @@
     <ClCompile Include="PParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="funccalllistnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activationrecord.h">
@@ -260,6 +263,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funccalllistnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

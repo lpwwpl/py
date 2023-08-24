@@ -30,6 +30,7 @@ namespace PyLanguage {
 	class BreakNode;
 	class ContinueNode;
 	class PassNode;
+	class FuncCallsNode;
 	class Visitor
 	{
 	public:
@@ -61,6 +62,8 @@ namespace PyLanguage {
 		virtual void VisitBreak(BreakNode* expr) = 0;
 		virtual void VisitContinue(ContinueNode* expr) = 0;
 		virtual void VisitPass(PassNode* expr) = 0;
+		virtual void VisitFuncCallList(FuncCallsNode* expr) = 0;
+
 	};
 
 }

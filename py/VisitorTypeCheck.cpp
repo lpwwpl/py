@@ -141,3 +141,7 @@ void VisitorTypeCheck::VisitPass(PassNode* expr)
 {
 
 }
+void VisitorTypeCheck::VisitFuncCallList(FuncCallsNode* expr)
+{
+
+}

@@ -40,6 +40,7 @@ namespace PyLanguage {
 		void VisitForExpr(ForExprNode* expr);
 		void VisitBreak(BreakNode* expr);
 		void VisitContinue(ContinueNode* expr) ;
+		void VisitFuncCallList(FuncCallsNode* expr);
 	};
 
 }

@@ -130,7 +130,7 @@ void VisitorPyPrint::VisitFuncCall(FunctionCallNode* expr)
         str.append(INTENT);
     }
     //str.append("self.");
-    str.append(expr->_name);
+    str.append(expr->_indent->getName());
     str.append("(");
     int expr_count = expr->_expressionList->size();
     for (size_t i = 0; i < expr_count; i++)
@@ -526,6 +526,11 @@ void VisitorPyPrint::VisitContinue(ContinueNode* expr)
 
 }
 void VisitorPyPrint::VisitPass(PassNode* expr)
+{
+
+}
+
+void VisitorPyPrint::VisitFuncCallList(FuncCallsNode* expr)
 {
 
 }

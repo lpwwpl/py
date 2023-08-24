@@ -37,6 +37,7 @@ namespace PyLanguage
             case token::ASS: return _op1->Execute() = _op2->Execute(); break;
             case token::NOT: return !(_op1->Execute().toBool()); break;
             case token::LC:return _op1->Execute().toDouble(); break;
+            case token::POSITIVE:return +_op1->Execute().toDouble(); break;
             case token::UMINUS: return -_op1->Execute().toDouble(); break;
             case token::ADD: 
             {
@@ -56,6 +57,7 @@ namespace PyLanguage
                 }
                 break;
             }
+            case token::DIVIDE: return _op1->Execute().toDouble() / _op2->Execute().toDouble(); break;
             case token::GT: return _op1->Execute().toDouble() > _op2->Execute().toDouble();break;
             case token::GE: return _op1->Execute().toDouble() >= _op2->Execute().toDouble();break;
             case token::LE: return _op1->Execute().toDouble() <= _op2->Execute().toDouble();break;
@@ -93,6 +95,12 @@ namespace PyLanguage
         case token::LC:
         {
             QString temp = QString("(%1)").arg(_op1->toRaw());
+            str = temp;
+        }
+        break;
+        case token::POSITIVE:
+        {
+            QString temp = QString("%1%2").arg("+").arg(_op1->toRaw());
             str = temp;
         }
         break;
@@ -184,6 +192,12 @@ namespace PyLanguage
             str = temp;
         }
         break;
+        case token::DIVIDE: 
+        {
+            QString temp = QString("%1 / %2").arg(_op1->toRaw()).arg(_op2->toRaw());
+            str = temp;
+        }
+            break;
         default: std::cerr << "Damn ! Looks like we forgot to implement something..." << std::endl;
             exit(EXIT_FAILURE);
         }

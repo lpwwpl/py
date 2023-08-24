@@ -45,6 +45,7 @@
       class IdentifierNode;
       class BreakNode;
       class ContinueNode;
+      class FuncCallsNode;
       class PassNode;
       template <class T> class ListNode;
    }
@@ -109,6 +110,8 @@
    ElseIfNode* elseif_stmNode;
    DimNumsNode*     dim_num_stmNode;
 
+   FuncCallsNode* func_call_listNode;
+
 }
 %right ASS
 
@@ -123,10 +126,11 @@
 %nonassoc ELSE
 %nonassoc NOT 
 %nonassoc UMINUS
+%nonassoc POSITIVE 
 %nonassoc PREFIX
 
 //DIV
-%token GE LE EQ NE IF ADD SUB MUL LT GT RETURN NumberType TextType VoidType SPACES THEN DOLAR UMINUS  CLASS SELF PIN RANGE BREAK DEF DOT PASS CONTINUE
+%token GE LE EQ NE IF ADD SUB MUL LT GT RETURN NumberType TextType VoidType SPACES THEN DOLAR UMINUS  CLASS SELF PIN RANGE BREAK DEF DOT PASS CONTINUE POSITIVE
 %token ASS LR RR COMMA LC RC LESS GREATER COLON FNULL DEVCOLON NOT UNINDENT INDENT
 %token FTRUE FFALSE FOR FROM SEMICOLON  LBRACE RBRACE WHILE
 %token AND OR MOD ELIF    
@@ -148,6 +152,7 @@
 %type <functionNode> function_declaration
 %type <listNode>  declaration_list  
 %type <dim_num_stmNode> dim_num_stm
+%type <func_call_listNode> func_call_list
 %type <statementListNode> statement_list block
 %type <listNode> func_call_parameter_list   
 //inst_expr_ass_list
@@ -198,7 +203,8 @@ parameter_declaration_list:
     ;
 
 parameter_declaration:
-    var_expression {$$ = new ParameterNode($1,nullptr);}
+    expression {$$ = new ParameterNode($1,nullptr);}
+    |     expression ASS expression {$$ = new ParameterNode($1,$3);}
     ;
 
 func_call_parameter_list:
@@ -213,7 +219,6 @@ func_call_parameter_list:
 	;
 
 block :  statement_list  { $$ = $1; }
-
       ;
 
 statement_list:
@@ -222,8 +227,8 @@ statement_list:
     ;
 
 function_call:
-     Identifier LC func_call_parameter_list RC  { $$ = new FunctionCallNode($1, $3);}
-     | Identifier LC RC  { $$ = new FunctionCallNode($1, NULL);}
+     var_expression LC func_call_parameter_list RC  { $$ = new FunctionCallNode($1, $3);}
+     | var_expression LC RC  { $$ = new FunctionCallNode($1, NULL);}
     ;
 
 statement:
@@ -232,7 +237,7 @@ statement:
     | while_loop { $$ = $1; }
     | for { $$ = $1; }
     | return  { $$ = $1;}
-    | function_call {$$ = $1;}  
+    | func_call_list  { $$ = $1;}
     | BREAK {$$ = new BreakNode();}  
     | CONTINUE  {$$ = new ContinueNode();}  
     | PASS {$$ = new PassNode();}
@@ -299,6 +304,10 @@ assignment:
 
     ;
 
+func_call_list:
+    function_call { $$ = new FuncCallsNode($1); }
+    | func_call_list DOT function_call {   $1->push_back($3);     }
+
 dim_num_stm:
 	expression 	
     {
@@ -315,7 +324,7 @@ struct_index:
    ;
 
 array_index: 
- Identifier LBRACE expression RBRACE {IdentifierNode* id = new IdentifierNode($1);$$ = new ArrayIndexNode(id, $3);}
+ Identifier LR expression RR {IdentifierNode* id = new IdentifierNode($1);$$ = new ArrayIndexNode(id, $3);}
  ;
 
 
@@ -323,6 +332,7 @@ op_expr:
    expression ADD expression { $$ = new OperatorNode(token::ADD, $1, $3); }
  | expression SUB expression { $$ = new OperatorNode(token::SUB, $1, $3); }
  | SUB expression  %prec UMINUS{ $$ = new OperatorNode(token::UMINUS, $2); }
+ | ADD expression  %prec POSITIVE{ $$ = new OperatorNode(token::POSITIVE, $2); }
  | expression MUL expression { $$ = new OperatorNode(token::MUL, $1, $3); }
  | expression LT expression { $$ = new OperatorNode(token::LT, $1, $3); }
  | expression GT expression { $$ = new OperatorNode(token::GT, $1, $3); }
@@ -333,6 +343,7 @@ op_expr:
  | expression AND expression {$$ = new OperatorNode(token::AND, $1, $3);}
  | expression OR expression {$$ = new OperatorNode(token::OR, $1, $3);}
  | expression MOD expression {$$ = new OperatorNode(token::MOD, $1, $3);}
+ | expression DIVIDE expression {$$ = new OperatorNode(token::DIVIDE, $1, $3);}
  //| expression ASS expression { $$ = new OperatorNode(token::ASS, $1, $3); }
  //| ADD expression  %prec PREFIX{ $$ = new OperatorNode(token::UMINUS, $2); }
  | NOT expression %prec PREFIX{$$ = new OperatorNode(token::NOT, $2);}  
@@ -350,7 +361,7 @@ expression:
  | FFALSE {$$ = new Boolean(0);}
  | var_expression {$$ = $1;}
  | op_expr {$$ = $1;}
- | function_call  { $$ = $1;}
+ | func_call_list  { $$ = $1;}
  | LR dim_num_stm RR {$$ = $2;}
  //| BREAK {}
  ;

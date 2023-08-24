@@ -6,11 +6,11 @@
 
 namespace PyLanguage
 {
-    FunctionCallNode::FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList)
-            :  ASTNode(), _name(name),
+    FunctionCallNode::FunctionCallNode(ASTNode* indent, ListNode<ASTNode> * expressionList)
+            :  ASTNode(), _indent(indent),
              _expressionList(expressionList)
     {
-        auto function = SymbolTable::Instance().Function(name);
+        auto function = SymbolTable::Instance().Function(&_indent->getName());
         if (!function) { return; }
         auto expectedArguments = function->Arguments();
 
@@ -19,7 +19,7 @@ namespace PyLanguage
 
         if (expectedArguments->size()>0 && expectedArguments->size() != expressionList->size())
         {
-            std::cerr << WRONG_NUMBER_OF_ARGUMENTS << "(" << name->toStdString() << ")\n";
+            std::cerr << WRONG_NUMBER_OF_ARGUMENTS << "(" << _indent->getName().toStdString() << ")\n";
             exit(EXIT_FAILURE);
         }
 
@@ -30,7 +30,7 @@ namespace PyLanguage
             if (typeExpected != typeActual)
             {
                 std::cerr << TYPE_CONFLICT << typeActual.toStdString() << " to " << typeExpected.toStdString() << std::endl;
-                std::cerr << "in function: " << name->toStdString() << std::endl;
+                std::cerr << "in function: " << _indent->getName().toStdString() << std::endl;
                 std::cerr << "argument: " << i << std::endl;
                 exit(EXIT_FAILURE);
             }
@@ -47,9 +47,9 @@ namespace PyLanguage
         for (auto expression: *_expressionList)
             SymbolTable::Instance().PushArgument(expression->Execute());
         SymbolTable::Instance().PushArgument((int)_expressionList->size());
-        PyLanguage::FunctionNode*  func = SymbolTable::Instance().Function(_name);
+        PyLanguage::FunctionNode*  func = SymbolTable::Instance().Function(&_indent->getName());
         if (func)
-            return SymbolTable::Instance().Function(_name)->Execute();
+            return SymbolTable::Instance().Function(&_indent->getName())->Execute();
         else
             return 0;
     }
@@ -61,7 +61,7 @@ namespace PyLanguage
             str.append("    ");
         }
         //str.append("self.");
-        str.append(_name);
+        str.append(_indent->toRaw());
         str.append(" ");
         if (_expressionList)
         {
